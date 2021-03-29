@@ -1,0 +1,31 @@
+"Name"     = 'Pbl Compiladores'
+"Author"   = 'José Ricardo e Cleybson Cardoso'
+"Version"  = '0.0.1'
+"About"    = 'Declaração do escopo de uma função'
+
+"Start Symbol" = <Function Declaration>
+
+
+
+{ID Head}      = {Letter} + [_] + [$]
+{ID Tail}      = {Alphanumeric} + [_] + [$]
+{String Chars1} = {Printable} + {HT} - ["\]
+{String Chars2} = {Printable} + {HT} - [\'']
+{Hex Digit}    = {Digit} + [ABCDEF] + [abcdef]
+{RegExp Chars} = {Letter}+{Digit}+['^']+['$']+['*']+['+']+['?']+['{']+['}']+['|']+['-']+['.']+[',']+['#']+['[']+[']']+['_']+['<']+['>']
+{Non Terminator} = {String Chars1} - {CR} - {LF}
+{Non Zero Digits}={Digit}-[0]
+
+! ------------------------------------------------- Terminals
+
+Identifier    = {ID Head}{ID Tail}*
+
+
+
+<Function Declaration> ::= 'function' Identifier '(' <Formal Parameter List> ')' '{' <Function Body> '}'
+                         | 'function' Identifier '(' ')' '{' <Function Body> '}'
+
+<Formal Parameter List> ::= Identifier
+                          | <Formal Parameter List> ',' Identifier
+
+<Function Body> ::=
