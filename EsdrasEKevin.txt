@@ -3,13 +3,13 @@
 "Version"  = '0.0.1'
 "About"    = 'Expressões Lógica e Relacional'
 
-{Exp Logic}      ::= && 
-					| || 
-					| !
+<Logical Expression>    ::= && 
+			  | || 
+			  | !
 
-{Exp Relational} ::= < 
-					| > 
-					| == 
-					| != 
-					| <= 
-					| >=
+<Relational Expression> ::= < 
+			  | > 
+			  | == 
+			  | != 
+			  | <= 
+			  | >=
