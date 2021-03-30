@@ -1,0 +1,36 @@
+"Name"    = 'Escopo Varíavel' 
+"Author"  = 'Gustavo Alves e Hiago Rangel' 
+!-------------------------------------------------
+"Start Symbol" = ListDeclaration
+!--------------------------------------------------                
+!Terminal
+!-------------------------------------------------- 
+{String Char} = {Printable} - ["] 
+Identificador = (('global'|'local')'.')?{Letter}({AlphaNumeric} | [_])*
+Numero = {Digit}+('.'{Digit}+)?
+StringChar  = '"'{String Char}*'"'
+!--------------------------------------------------               
+!Rules
+!-------------------------------------------------- 
+
+<ListDeclaration> ::= 'var' '{' <VariablesList> '}'      
+              
+<VariablesList> ::= <Type> <Variable> <VariablesList> | <Void>
+
+<Variable> ::= Identificador <Relational> <Value> <Delimiter> | Identificador <Delimiter>
+<Relational> ::= '='                                                                     
+<Delimiter> ::= ',' <Variable> |';'
+                                                                                  
+<Type> ::= int | real | boolean | string
+<Value> ::= Numero | true | false | StringChar| ''          
+<Void> ::= 
+
+_______________________________________________________________________________________________________________________
+##Teste##
+
+var{
+int num = 1; 
+string meme = "meeeeee_   dfer##$%&&"; 
+real num_2 = 1.2; 
+boolean local.nome = true; 
+}
