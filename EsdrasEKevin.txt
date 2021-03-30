@@ -1,0 +1,15 @@
+"Name"     = 'Pbl Compiladores'
+"Author"   = 'Esdras Abreu e Kevin Cerqueira'
+"Version"  = '0.0.1'
+"About"    = 'Expressões Lógica e Relacional'
+
+{Exp Logic}      ::= && 
+					| || 
+					| !
+
+{Exp Relational} ::= < 
+					| > 
+					| == 
+					| != 
+					| <= 
+					| >=
