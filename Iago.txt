@@ -1,0 +1,42 @@
+"Name"     = 'Grammar'
+"Author"   = 'Iago Machado'
+"Version"  = '1.0'
+
+"Start Symbol" = <Start>
+"Case Sensitive" = 'True'
+                 
+! ------------------------------------------------- Rules
+
+<Boolean Literal> ::= 'true'
+                    | 'false'
+
+<Expression> ::= <Relational Expression>
+              | <Conditional Expression>
+              | <Boolean Literal> 
+              
+<Call Expression> ::= <Function Call>
+                   | <Procedure Call>
+              
+<Statement> ::= <Block> 
+              | <Var>
+              | <Const>
+              | <Void>
+              | <If>
+              | <If Else>
+              | <While>
+              | <Print>
+              | <Read>
+              | <Return>
+              | <Call Expression>
+              | <Assignment Expression>
+              | <Arithmetic Expression>
+              | <Expression>
+
+<Block> ::= '{' '}'
+           | '{' <Statement List> '}'
+        
+<Statement List> ::= <Statement>
+                   | <Statement List> <Statement>
+
+<While> ::= 'while' '(' <Expression> ')' <Statement>
+
