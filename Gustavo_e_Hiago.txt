@@ -1,29 +1,30 @@
 "Name"    = 'Escopo Varíavel' 
 "Author"  = 'Gustavo Alves e Hiago Rangel' 
 !-------------------------------------------------
-"Start Symbol" = ListDeclaration
+"Start Symbol" = Var
 !--------------------------------------------------                
 !Terminal
 !-------------------------------------------------- 
 {String Char} = {Printable} - ["] 
-Identificador = (('global'|'local')'.')?{Letter}({AlphaNumeric} | [_])*
-Numero = {Digit}+('.'{Digit}+)?
+Identifier = (('global'|'local')'.')?{Letter}({AlphaNumeric} | [_])*
+Number = {Digit}+('.'{Digit}+)?
 StringChar  = '"'{String Char}*'"'
 !--------------------------------------------------               
 !Rules
 !-------------------------------------------------- 
 
-<ListDeclaration> ::= 'var' '{' <VariablesList> '}'      
+<Var> ::= 'var' '{' <VariablesList> '}'      
               
 <VariablesList> ::= <Type> <Variable> <VariablesList> | <Void>
 
-<Variable> ::= Identificador <Relational> <Value> <Delimiter> | Identificador <Delimiter>
+<Variable> ::= Identifier <Relational> <Value> <Delimiter> | Identifier <Delimiter>
 <Relational> ::= '='                                                                     
 <Delimiter> ::= ',' <Variable> |';'
                                                                                   
 <Type> ::= int | real | boolean | string
-<Value> ::= Numero | true | false | StringChar| ''          
+<Value> ::= Number | true | false | StringChar| ''          
 <Void> ::= 
+
 
 _______________________________________________________________________________________________________________________
 ##Teste##
