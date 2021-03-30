@@ -1,0 +1,63 @@
+﻿"Name"     = 'Enter the name of the grammar'
+"Author"   = 'Enter your name'
+"Version"  = 'The version of the grammar and/or language'
+"About"    = 'A short description of the grammar'
+
+"Start Symbol" = <Start>
+
+! -------------------------------------------------
+! Character Sets
+! -------------------------------------------------
+
+{String Chars} = {Printable} + {HT} - ["\]
+
+! -------------------------------------------------
+! Terminals
+! -------------------------------------------------
+
+Identifier    = {Letter}({AlphaNumeric} | '_')*
+StringLiteral = '"' ( {String Chars} | '\' {Printable} )* '"'
+
+! -------------------------------------------------
+! Rules
+! -------------------------------------------------
+
+! The grammar starts below
+<Start> ::= <Const> <Var> 'start(){' <Program> '}' <functions or procedures> 
+<Program> ::= <Var> <CodeBlock> 
+<If> ::= 'if(' <Expressoes> '){' <CodeBlock> '}' <Else>
+<Else> ::= 'else{' <CodeBlock> '}' | <Void>
+<Const> ::=
+<Var> ::= 
+<functions or procedures> ::= 
+!Só para sinalizar a palavra vazia na gramatica
+<Void> ::= 
+        
+!A ser desenvolvido   
+<Expressoes> ::= 
+<CodeBlock> ::= <If> | <Void>
+             
+
+<Expression>  ::= <Expression> '>'  <Add Exp> 
+               |  <Expression> '<'  <Add Exp> 
+               |  <Expression> '<=' <Add Exp> 
+               |  <Expression> '>=' <Add Exp>
+               |  <Expression> '==' <Add Exp>    !Equal
+               |  <Expression> '<>' <Add Exp>    !Not equal
+               |  <Add Exp> 
+
+<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
+               |  <Add Exp> '-' <Mult Exp>
+               |  <Mult Exp> 
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
+               |  <Mult Exp> '/' <Negate Exp> 
+               |  <Negate Exp> 
+
+<Negate Exp>  ::= '-' <Value> 
+               |  <Value> 
+
+!Add more values to the rule below - as needed
+
+<Value>       ::= Identifier
+               |  '(' <Expression> ')'
