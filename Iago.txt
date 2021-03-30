@@ -10,8 +10,8 @@
 <Boolean Literal> ::= 'true'
                     | 'false'
 
-<Expression> ::= <Relational Expression>
-              | <Conditional Expression>
+<Conditional Expression> ::= <Relational Expression>
+              | <Logical Expression>
               | <Boolean Literal> 
               
 <Call Expression> ::= <Function Call>
@@ -30,7 +30,7 @@
               | <Call Expression>
               | <Assignment Expression>
               | <Arithmetic Expression>
-              | <Expression>
+              | <Conditional Expression>
 
 <Block> ::= '{' '}'
            | '{' <Statement List> '}'
@@ -38,5 +38,4 @@
 <Statement List> ::= <Statement>
                    | <Statement List> <Statement>
 
-<While> ::= 'while' '(' <Expression> ')' <Statement>
-
+<While> ::= 'while' '(' <Conditional Expression> ')' <Statement>
