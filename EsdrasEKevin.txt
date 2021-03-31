@@ -1,15 +1,30 @@
-"Name"     = 'Pbl Compiladores'
+"Name"     = 'MI - Compiladores'
 "Author"   = 'Esdras Abreu e Kevin Cerqueira'
-"Version"  = '0.0.1'
+"Version"  = '0.0.3'
 "About"    = 'Expressões Lógica e Relacional'
 
-<Logical Expression>    ::= && 
-			  | || 
-			  | !
+"Start Symbol" = <Expression>
+               
+Identifier    = {Letter}({AlphaNumeric} | '_')*
+               
+<Logical Operator>    ::= '&&'
+                        | '||'
+                        | '!'
 
-<Relational Expression> ::= < 
-			  | > 
-			  | == 
-			  | != 
-			  | <= 
-			  | >=
+<Relational Operator> ::= '<' 
+                        | '>' 
+                        | '==' 
+                        | '!=' 
+                        | '<='
+                        | '>='
+              
+<Expression> ::= <Relational Expression> 
+               | <Logic Expression>
+
+<Relational Expression>  ::= <Expression> <Relational Operator> <Expression> 
+            
+<Logic Expression>  ::= <Expression> <Logical Operator> <Expression> 
+               |  '!' <Expression>  
+               
+<Value>       ::= Identifier
+               |  '(' <Expression> ')'
