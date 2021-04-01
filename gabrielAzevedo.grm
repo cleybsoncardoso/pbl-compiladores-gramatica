@@ -1,0 +1,54 @@
+"Name"     = 'Enter the name of the grammar'
+"Author"   = 'Enter your name'
+"Version"  = 'The version of the grammar and/or language'
+"About"    = 'A short description of the grammar'
+
+"Start Symbol" = <Program>
+
+! -------------------------------------------------
+! Character Sets
+! -------------------------------------------------
+
+{String Chars} = {Printable} + {HT} - ["]
+
+! -------------------------------------------------
+! Terminals
+! -------------------------------------------------
+
+Identifier    = {Letter}{AlphaNumeric}*
+StringLiteral = '"' {String Chars}* '"'
+
+! -------------------------------------------------
+! Rules
+! -------------------------------------------------
+
+! The grammar starts below
+<Program> ::= 
+
+<Expression>  ::= <Expression> '+' <Mult Exp> 
+               |  <Expression> '-' <Mult Exp> 
+               |  <Mult Exp> 
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
+               |  <Mult Exp> '/' <Negate Exp> 
+               |  <Negate Exp> 
+
+<Negate Exp>  ::= '-' <Value> 
+               |  <Value> 
+
+!Add more values to the rule below - as needed
+
+<Value>       ::= Identifier            
+               |  '(' <Expression> ')'
+! Struct Declaration
+<Decl>  ::= <Struct Decl>
+
+<Func Decl>  ::= <Func ID> '(' <Id List> ')' <Struct Def> <Block>
+
+<Struct Decl>  ::= struct Id '{' <Struct Def> '}'  ';' 
+
+<Struct Def>   ::= <Var Decl> <Struct Def>
+                 | <Var Decl>
+
+<Base>     ::= struct Id 
+             | struct '{' <Struct Def> '}' 
