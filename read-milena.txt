@@ -3,7 +3,7 @@
 "Version"  = '1.0'
 "About"    = 'Metodo Read'
 
-"Start Symbol" = <Start>
+"Start Symbol" = <VariablesList>
                  
 ! ------------------------------------------------- Rules
 
