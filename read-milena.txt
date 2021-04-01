@@ -1,0 +1,14 @@
+"Name"     = 'Compiler Grammar'
+"Author"   = 'Milena Melo'
+"Version"  = '1.0'
+"About"    = 'Metodo Read'
+
+"Start Symbol" = <Start>
+                 
+! ------------------------------------------------- Rules
+
+         
+<VariablesList> ::= <VariablesListAuxiliar> 
+<VariablesListAuxiliar> ::= ',' <ListArgumentsAuxiliar> 
+         
+<Read>  ::= 'read' '(' <VariablesList> ')' ';'
