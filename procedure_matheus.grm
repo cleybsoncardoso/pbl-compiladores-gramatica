@@ -1,0 +1,6 @@
+<Proc Proto> ::= ID '(' <Id List>')' ';'
+               | ID'(' ')' ';'
+
+<Proc Decl> ::= procedure ID '(' <Params> ')' <Block>
+              | ID '(' <Id List> ')' <Block>
+              | ID '(' ')' <Block>
