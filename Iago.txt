@@ -20,22 +20,29 @@
 <Statement> ::= <Block> 
               | <Var>
               | <Const>
-              | <Void>
+              | <Empty Statement>
               | <If>
               | <If Else>
               | <While>
               | <Print>
               | <Read>
-              | <Return>
+              | <Return Statement>
               | <Call Expression>
               | <Assignment Expression>
               | <Arithmetic Expression>
-              | <Conditional Expression>
+              | <Expression>
 
-<Block> ::= '{' '}'
-           | '{' <Statement List> '}'
+<Block> ::= <Void>
+           | <Statement List>
         
 <Statement List> ::= <Statement>
                    | <Statement List> <Statement>
 
-<While> ::= 'while' '(' <Conditional Expression> ')' <Statement>
+<Return Statement> ::= 'return' ';'
+                       | 'return' <Expression> ';'
+                       
+<Empty Statement> ::= ';'
+                   
+<Void> ::=
+
+<While> ::= 'while' '(' <Conditional Expression> ')' '{' <Statement> '}'
