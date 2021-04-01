@@ -8,7 +8,7 @@
 ! ------------------------------------------------- Rules
 
          
-<VariablesList> ::= <VariablesListAuxiliar> 
-<VariablesListAuxiliar> ::= ',' <ListArgumentsAuxiliar> 
+<VariablesList> ::= Identifier <VariablesListAuxiliar> 
+<VariablesListAuxiliar> ::= ',' <VariablesList> 
          
 <Read>  ::= 'read' '(' <VariablesList> ')' ';'
