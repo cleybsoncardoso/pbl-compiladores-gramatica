@@ -3,6 +3,6 @@
 "Version"  = '0.0.1'
 "About"    = 'Metodo print'
 
-<printed> ::= <variavel> | <exp_cadeia>
+<printed> ::= Identifier | <exp_cadeia>
 <printed_aux> ::= ','<printed><printed_aux> | 
 <print> ::= print '(' <printed> <printed_aux>  ')'’;’
