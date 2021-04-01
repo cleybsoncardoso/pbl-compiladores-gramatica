@@ -25,16 +25,16 @@ StringLiteral = '"' ( {String Chars} | '\' {Printable} )* '"'
 ! The grammar starts below
 <Start> ::= <Const> <Var> 'start(){' <Program> '}' <functions or procedures> 
 <Program> ::= <Var> <CodeBlock> 
-<If> ::= 'if(' <Expressoes> '){' <CodeBlock> '}' <Else>
+<If> ::= 'if(' <Expression> '){' <CodeBlock> '}' <Else>
 <Else> ::= 'else{' <CodeBlock> '}' | <Void>
 <Const> ::=
 <Var> ::= 
-<functions or procedures> ::= 
+<functions or procedures> ::= <Function Declaration> | 
 !Só para sinalizar a palavra vazia na gramatica
 <Void> ::= 
         
 !A ser desenvolvido   
-<Expressoes> ::= 
+<Function Declaration> ::= 
 <CodeBlock> ::= <If> | <Void>
              
 
