@@ -6,7 +6,8 @@
 !Terminal
 !-------------------------------------------------- 
 {String Char} = {Printable} - ["] 
-Identifier = (('global'|'local')'.')?{Letter}({AlphaNumeric} | [_])*
+
+Identifier = {Letter} ({AlphaNumeric} | [_]) *
 Number = {Digit}+('.'{Digit}+)?
 StringChar  = '"'{String Char}*'"'
 !--------------------------------------------------               
@@ -33,5 +34,5 @@ var{
 int num = 1; 
 string meme = "meeeeee_   dfer##$%&&"; 
 real num_2 = 1.2; 
-boolean local.nome = true; 
+boolean aberto = true; 
 }
