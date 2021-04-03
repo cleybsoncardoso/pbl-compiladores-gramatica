@@ -25,6 +25,7 @@ Identifier    = {Letter}({AlphaNumeric} | '_')*
             
 <Logic Expression>  ::= <Expression> <Logical Operator> <Expression> 
                |  '!' <Logic Expression>  
+               |  '!' <Relational Expression>
                
 <Value>       ::= Identifier
                |  '(' <Expression> ')'
