@@ -1,0 +1,145 @@
+﻿! -----------------------------------------------------------------------
+! Gramatica Desenvolvida para disciplina 
+! EXA869 - MI Processadores de Linguagem de Programação
+! -----------------------------------------------------------------------
+
+
+"Case Sensitive" = True
+"Start Symbol"   = <Start>
+
+
+! ------------------------------------------------- Terminals
+
+Identifier    = {Letter}({AlphaNumeric} | '_')*
+ReservedWord = 'start'
+             |
+
+! ===================================================================
+! Comments
+! ===================================================================
+
+Comment Start = '/*'
+Comment End   = '*/'
+Comment Line  = '//'
+
+
+! ===================================================================
+! Start 
+! ===================================================================
+
+<Start> ::= <Var> <Decls> ReservedWord'(){' <Body> '}' <Decls> 
+
+        
+<Decls> ::= <Decl> <Decls>
+          |
+          
+
+<Decl>  ::= <Function Declaration>
+          | <Proc Decl>
+          | <Proc Proto>
+          | 
+   
+             
+! ===================================================================
+! Function  Declaration
+! ===================================================================
+<Function Declaration> ::= 'function' Identifier '(' <Params> ')' '{' <Body> '}'
+                         | 'function' Identifier '(' ')' '{' <Body> '}'
+
+<Formal Parameter List> ::= Identifier
+                          | <Formal Parameter List> ',' Identifier
+
+! ===================================================================
+! Procedure  Declaration
+! ===================================================================
+
+<Proc Proto> ::= Identifier '(' <Formal Parameter List>')' ';'
+               | Identifier '('')' ';'
+
+<Proc Decl> ::= procedure Identifier '(' <Params> ')' '{' <Body> '}'
+              | Identifier '(' <Formal Parameter List> ')' '{' <Body> '}'
+              | Identifier '(' ')' '{' <Body> '}'
+
+<Params>     ::= <Param> ',' <Params>
+               | <Param>
+               
+<Param>      ::= const <Type> Identifier
+               |       <Type> Identifier
+
+! ===================================================================
+! Type Declaration
+! ===================================================================
+
+<Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  ';' 
+
+<Struct Def>   ::= <Var> <Struct Def>
+                 | <Var>
+
+<Base>     ::= struct Identifier                                      !!!! Não esta utilizando este não terminal
+             | struct '{' <Struct Def> '}' 
+             
+! ===================================================================
+! Variable Declaration
+! ===================================================================
+
+<Var> ::= 'var' '{' <VariablesList> '}'
+              
+<VariablesList> ::= <Type> <Variable> <VariablesList> | <Void>
+
+<Variable> ::= Identifier <Relational> <Value> <Delimiter> | Identifier <Delimiter>
+<Relational> ::= '='                                                                     
+<Delimiter> ::= ',' <Variable> |';'
+                                                                                  
+<Type> ::= int | real | boolean | string
+<Value> ::= Number | true | false | StringChar| ''          
+<Void> ::= 
+
+
+
+! ===================================================================
+! While
+! ===================================================================
+
+<While> ::= 'while' '(' <Conditional Expression> ')' '{' <Body> '}'
+         
+<Boolean Literal> ::= 'true'
+                    | 'false'
+
+<Conditional Expression> ::= <Boolean Literal> 
+                            | <Relational Expression>
+                            | <Logical Expression>
+! ===================================================================
+! if - then - else
+! =================================================================== 
+
+<If> ::= 'if(' <Conditional Expression> ')then{' <Body> '}' <Else>
+<Else> ::= 'else{' <Body> '}' | <Void>
+
+
+! ===================================================================
+! Statements
+! ===================================================================
+<Body>        ::=   <Body> <Body Item> 
+                 |  
+              
+<Body Item>  ::=  <Var>
+                 | <Proc Proto>
+                 | <While>
+                 | <If>
+                 | <Void>
+           
+<Id List> ::= <Void>
+
+
+! ===================================================================
+! Logical Expressions 
+! ===================================================================
+
+<Relational Expression> ::= 'toImplementRelational'
+<Logical Expression> ::= 'toImplementLogical'
+                      
+! ===================================================================
+! Arithmetic Expressions 
+! ===================================================================
+
+
