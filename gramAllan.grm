@@ -25,7 +25,7 @@ StringLiteral = '"' ( {String Chars} | '\' {Printable} )* '"'
 ! The grammar starts below
 <Start> ::= <Const> <Var> 'start(){' <Program> '}' <functions or procedures> 
 <Program> ::= <Var> <CodeBlock> 
-<If> ::= 'if(' <Expression> '){' <CodeBlock> '}' <Else>
+<If> ::= 'if(' <Expression> ')then{' <CodeBlock> '}' <Else>
 <Else> ::= 'else{' <CodeBlock> '}' | <Void>
 <Const> ::=
 <Var> ::= 
