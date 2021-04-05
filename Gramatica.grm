@@ -5,14 +5,12 @@
 
 
 "Case Sensitive" = True
-"Start Symbol"   = <Start>
+"Start Symbol"   = <Program>
 
 
 ! ------------------------------------------------- Terminals
 
 Identifier    = {Letter}({AlphaNumeric} | '_')*
-ReservedWord = 'start'
-             |
 
 ! ===================================================================
 ! Comments
@@ -27,11 +25,11 @@ Comment Line  = '//'
 ! Start 
 ! ===================================================================
 
-<Start> ::= <Var> <Decls> ReservedWord'(){' <Body> '}' <Decls> 
+<Program> ::= <Var><Decls><Start> 
 
+<Start> ::= 'start(){' <Body> '}' <Decls> 
         
 <Decls> ::= <Decl> <Decls>
-          |
           
 
 <Decl>  ::= <Function Declaration>
@@ -44,24 +42,22 @@ Comment Line  = '//'
 ! Function  Declaration
 ! ===================================================================
 <Function Declaration> ::= 'function' Identifier '(' <Params> ')' '{' <Body> '}'
-                         | 'function' Identifier '(' ')' '{' <Body> '}'
 
 <Formal Parameter List> ::= Identifier
-                          | <Formal Parameter List> ',' Identifier
+                          | <Formal Parameter List> ',' Identifier | 
 
 ! ===================================================================
 ! Procedure  Declaration
 ! ===================================================================
 
 <Proc Proto> ::= Identifier '(' <Formal Parameter List>')' ';'
-               | Identifier '('')' ';'
+               
 
-<Proc Decl> ::= procedure Identifier '(' <Params> ')' '{' <Body> '}'
+<Proc Decl> ::= 'procedure' Identifier '(' <Params> ')' '{' <Body> '}'
               | Identifier '(' <Formal Parameter List> ')' '{' <Body> '}'
-              | Identifier '(' ')' '{' <Body> '}'
 
 <Params>     ::= <Param> ',' <Params>
-               | <Param>
+               | <Param> | 
                
 <Param>      ::= const <Type> Identifier
                |       <Type> Identifier
