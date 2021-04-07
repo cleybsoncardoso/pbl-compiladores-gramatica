@@ -19,7 +19,11 @@ DecLiteral       = [123456789]{digit}*
 OctLiteral       = 0{Oct Digit}*
 HexLiteral       = 0x{Hex Digit}+
 FloatLiteral     = {Digit}*'.'{Digit}+
-<Number> ::= DecLiteral | OctLiteral | HexLiteral | FloatLiteral
+
+<Number> ::= DecLiteral 
+          | OctLiteral 
+          | HexLiteral 
+          | FloatLiteral
 
 
 ! ===================================================================
@@ -44,26 +48,33 @@ Comment Line  = '//'
 
 <Decl>  ::= <Function Declaration>
           | <Proc Decl>
-          | <Proc Proto>
-   
+
+             
+! ===================================================================
+! Paramters List
+! ===================================================================
+<Formal Parameter List> ::= <Formal Parameter Item> 
+                         | <Formal Parameter Item> ',' <Formal Parameter List>
+                         
+<Formal Parameter Item> ::= Identifier 
+                         | StringLiteral 
+                         | <Number>
+      
+
+<Formal Parameter List Read> ::=  Identifier 
+                              | <Formal Parameter List Read> ',' Identifier
+
              
 ! ===================================================================
 ! Function  Declaration
 ! ===================================================================
+
 <Function Declaration> ::= 'function' Identifier '(' <Params> ')' '{' <Body> '}'
                         
-<Formal Parameter List> ::= <Formal Parameter Item> | <Formal Parameter Item> ',' <Formal Parameter List>
-                         
-<Formal Parameter Item> ::= Identifier | StringLiteral | <Number>
-
-<Formal Parameter List Read> ::=  Identifier | <Formal Parameter List Read> ',' Identifier
 
 ! ===================================================================
 ! Procedure  Declaration
-! ===================================================================
-
-<Proc Proto> ::= Identifier '(' <Formal Parameter List>')' ';'
-               
+! ===================================================================               
 
 <Proc Decl> ::= 'procedure' Identifier '(' <Params> ')' '{' <Body> '}'
               | Identifier '(' <Formal Parameter List> ')' '{' <Body> '}'
@@ -73,6 +84,12 @@ Comment Line  = '//'
                
 <Param>      ::= const <Type> Identifier
                |       <Type> Identifier
+               
+! ===================================================================
+! Function n Procedures call
+! ===================================================================
+
+<Function Call> ::= Identifier '(' <Formal Parameter List>');'
 
 ! ===================================================================
 ! Type Declaration
@@ -96,8 +113,16 @@ Comment Line  = '//'
 <Relational> ::= '='                                                                     
 <Delimiter> ::= ',' <Variable> |';'
                                                                                   
-<Type> ::= int | real | boolean | string
-<Value> ::= Number | true | false | StringChar| ''          
+<Type> ::= int 
+        | real 
+        | boolean 
+        | string
+<Value> ::= Number 
+         | true 
+         | false 
+         | StringChar
+         | ''
+                   
 <Void> ::= 
 
 
@@ -126,13 +151,13 @@ Comment Line  = '//'
 ! ===================================================================
 ! read
 ! ===================================================================
-<Read>  ::= 'read' '(' <Formal Parameter List Read> ');'
+<Read>  ::= read'(' <Formal Parameter List Read> ');'
 
 ! ===================================================================
 ! print
 ! ===================================================================
 
-<Print> ::= print '(' <Formal Parameter List>  ');'
+<Print> ::= print'(' <Formal Parameter List>  ');'
 
 ! ===================================================================
 ! Statements
@@ -141,16 +166,13 @@ Comment Line  = '//'
                  |  
               
 <Body Item>  ::=  <Var>
-                 | <Proc Proto>
                  | <While>
                  | <If>
                  | <Read>
                  | <Print>
+                 | <Normal Stm>
+                 | <Function Call>
                  
-                 
-           
-<Id List> ::= <Void>
-
 
 ! ===================================================================
 ! Logical Expressions 
@@ -162,5 +184,47 @@ Comment Line  = '//'
 ! ===================================================================
 ! Arithmetic Expressions 
 ! ===================================================================
+
+<Normal Stm> ::= <Assign> ';' 
+              
+<Assign>  ::= Identifier '='   <Assign>
+               | Identifier '+='  <Assign>
+               | Identifier '-='  <Assign>
+               | Identifier '*='  <Assign>
+               | Identifier '/='  <Assign>
+               | <Expression>  
+
+<Expression>  ::= <Expression> '>'  <Add Exp> 
+               |  <Expression> '<'  <Add Exp> 
+               |  <Expression> '<=' <Add Exp> 
+               |  <Expression> '>=' <Add Exp>
+               |  <Expression> '==' <Add Exp>    !Equal
+               |  <Expression> '!=' <Add Exp>    !Not equal
+               |  <Add Exp> 
+
+<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
+               |  <Add Exp> '-' <Mult Exp>
+               |  <Mult Exp> 
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
+               |  <Mult Exp> '/' <Negate Exp>  
+               |  <Unary>
+
+<Unary>       ::= '++'   <Unary>
+               | '--'   <Unary>
+               | <Negate Exp>               
+
+<Negate Exp>  ::= '-' <Expression Value> 
+               |  <Expression Value> 
+
+!Add more values to the rule below - as needed
+
+<Expression Value>       ::= Identifier
+               | '(' <Expression> ')'
+               | Identifier '(' ')'          
+               | DecLiteral      
+               | OctLiteral      
+               | HexLiteral       
+               | FloatLiteral
 
 
