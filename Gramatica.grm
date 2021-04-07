@@ -11,6 +11,16 @@
 ! ------------------------------------------------- Terminals
 
 Identifier    = {Letter}({AlphaNumeric} | '_')*
+{String Chars} = {Printable} + {HT} - ["\]
+StringLiteral = '"' ( {String Chars} | '\' {Printable} )* '"'
+{Hex Digit}      = {Digit} + [abcdefABCDEF]
+{Oct Digit}      = [01234567]
+DecLiteral       = [123456789]{digit}*
+OctLiteral       = 0{Oct Digit}*
+HexLiteral       = 0x{Hex Digit}+
+FloatLiteral     = {Digit}*'.'{Digit}+
+<Number> ::= DecLiteral | OctLiteral | HexLiteral | FloatLiteral
+
 
 ! ===================================================================
 ! Comments
@@ -41,9 +51,12 @@ Comment Line  = '//'
 ! Function  Declaration
 ! ===================================================================
 <Function Declaration> ::= 'function' Identifier '(' <Params> ')' '{' <Body> '}'
+                        
+<Formal Parameter List> ::= <Formal Parameter Item> | <Formal Parameter Item> ',' <Formal Parameter List>
+                         
+<Formal Parameter Item> ::= Identifier | StringLiteral | <Number>
 
-<Formal Parameter List> ::= Identifier
-                          | <Formal Parameter List> ',' Identifier | 
+<Formal Parameter List Read> ::=  Identifier | <Formal Parameter List Read> ',' Identifier
 
 ! ===================================================================
 ! Procedure  Declaration
@@ -101,13 +114,25 @@ Comment Line  = '//'
 <Conditional Expression> ::= <Boolean Literal> 
                             | <Relational Expression>
                             | <Logical Expression>
+                            | Identifier
 ! ===================================================================
 ! if - then - else
 ! =================================================================== 
 
-<If> ::= 'if(' <Conditional Expression> ')then{' <Body> '}' <Else>
+<If> ::= 'if(' <Conditional Expression><Then> 
+<Then> ::= ')then{'<Body>'}'<Else>
 <Else> ::= 'else{' <Body> '}' | <Void>
 
+! ===================================================================
+! read
+! ===================================================================
+<Read>  ::= 'read' '(' <Formal Parameter List Read> ');'
+
+! ===================================================================
+! print
+! ===================================================================
+
+<Print> ::= print '(' <Formal Parameter List>  ');'
 
 ! ===================================================================
 ! Statements
@@ -119,6 +144,9 @@ Comment Line  = '//'
                  | <Proc Proto>
                  | <While>
                  | <If>
+                 | <Read>
+                 | <Print>
+                 
                  
            
 <Id List> ::= <Void>
