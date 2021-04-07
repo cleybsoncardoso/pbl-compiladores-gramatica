@@ -29,13 +29,12 @@ Comment Line  = '//'
 
 <Start> ::= 'start(){' <Body> '}' <Decls> 
         
-<Decls> ::= <Decl> <Decls>
+<Decls> ::= <Decl> <Decls> | <Void>
           
 
 <Decl>  ::= <Function Declaration>
           | <Proc Decl>
           | <Proc Proto>
-          | 
    
              
 ! ===================================================================
@@ -70,15 +69,13 @@ Comment Line  = '//'
 
 <Struct Def>   ::= <Var> <Struct Def>
                  | <Var>
-
-<Base>     ::= struct Identifier                                      !!!! Não esta utilizando este não terminal
-             | struct '{' <Struct Def> '}' 
+ 
              
 ! ===================================================================
 ! Variable Declaration
 ! ===================================================================
 
-<Var> ::= 'var' '{' <VariablesList> '}'
+<Var> ::= 'var' '{' <VariablesList> '}'| <Void>
               
 <VariablesList> ::= <Type> <Variable> <VariablesList> | <Void>
 
@@ -122,7 +119,7 @@ Comment Line  = '//'
                  | <Proc Proto>
                  | <While>
                  | <If>
-                 | <Void>
+                 
            
 <Id List> ::= <Void>
 
