@@ -139,7 +139,7 @@ Comment Line  = '//'
 <Conditional Expression> ::= <Boolean Literal> 
                             | <Relational Expression>
                             | <Logical Expression>
-                            | Identifier
+                            
 ! ===================================================================
 ! if - then - else
 ! =================================================================== 
@@ -192,15 +192,11 @@ Comment Line  = '//'
                | Identifier '-='  <Assign>
                | Identifier '*='  <Assign>
                | Identifier '/='  <Assign>
-               | <Expression>  
+               | <Add Exp>  
 
-<Expression>  ::= <Expression> '>'  <Add Exp> 
-               |  <Expression> '<'  <Add Exp> 
-               |  <Expression> '<=' <Add Exp> 
-               |  <Expression> '>=' <Add Exp>
-               |  <Expression> '==' <Add Exp>    !Equal
-               |  <Expression> '!=' <Add Exp>    !Not equal
-               |  <Add Exp> 
+<Op Relational> ::= '!=' | '==' | '<' | '>' | '>=' | '<='
+<Relational Expression>  ::= <Relational Expression> <Op Relational> <Expression Value>
+               |  <Expression Value>
 
 <Add Exp>     ::= <Add Exp> '+' <Mult Exp>
                |  <Add Exp> '-' <Mult Exp>
@@ -220,7 +216,7 @@ Comment Line  = '//'
 !Add more values to the rule below - as needed
 
 <Expression Value>       ::= Identifier
-               | '(' <Expression> ')'
+               | '(' <Relational Expression> ')'
                | Identifier '(' ')'          
                | DecLiteral      
                | OctLiteral      
