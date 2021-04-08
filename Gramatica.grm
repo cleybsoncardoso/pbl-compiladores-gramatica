@@ -179,7 +179,17 @@ Comment Line  = '//'
 ! ===================================================================
 
 <Relational Expression> ::= 'toImplementRelational'
-<Logical Expression> ::= 'toImplementLogical'
+
+<Conditional Operator>  ::= '&&'
+                      | '||' 
+                                                          
+<Logical Expression> ::= Identifier <Conditional Operator> Identifier
+                    | <Logical Expression> <Conditional Operator> Identifier
+                    | <Logical Expression> <Conditional Operator> <Boolean Literal>
+                    | <Boolean Literal> <Conditional Operator> Identifier
+                    | <Relational Expression> <Conditional Operator> <Logical Expression>
+                    | '!' <Logical Expression>
+                    | '!' <Relational Expression>
                       
 ! ===================================================================
 ! Arithmetic Expressions 
