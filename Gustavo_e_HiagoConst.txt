@@ -22,6 +22,14 @@ StringChar  = '"'{String Char}*'"'
 <Relational> ::= '='                                                                     
 <Delimiter> ::= ',' <Variable> |';'
                                                                                   
-<Type> ::= int | real | boolean | string
-<Value> ::= Number | true | false | StringChar          
+<Type> ::= int 
+        | real 
+        | boolean 
+        | string
+<Value> ::= Number 
+         | true 
+         | false 
+         | StringChar
+         | ''
+                   
 <Void> ::= 
