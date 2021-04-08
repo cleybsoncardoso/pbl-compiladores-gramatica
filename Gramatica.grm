@@ -99,8 +99,28 @@ Comment Line  = '//'
 
 <Struct Def>   ::= <Var> <Struct Def>
                  | <Var>
- 
-             
+! ===================================================================
+! Constant Declaration
+! =================================================================== 
+<Const> ::= 'const' '{' <VariablesList> '}'      
+              
+<VariablesList> ::= <Type> <Variable> <VariablesList>| <Void>
+
+<Variable> ::= Identifier <Relational> <Value> <Delimiter> 
+<Relational> ::= '='                                                                     
+<Delimiter> ::= ',' <Variable> |';'
+                                                                                  
+<Type> ::= int 
+        | real 
+        | boolean 
+        | string
+<Value> ::= <Number>
+         | true 
+         | false 
+         | StringChar
+         
+                   
+<Void> ::=             
 ! ===================================================================
 ! Variable Declaration
 ! ===================================================================
@@ -117,7 +137,7 @@ Comment Line  = '//'
         | real 
         | boolean 
         | string
-<Value> ::= Number 
+<Value> ::= <Number> 
          | true 
          | false 
          | StringChar

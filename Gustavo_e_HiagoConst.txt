@@ -30,6 +30,6 @@ StringChar  = '"'{String Char}*'"'
          | true 
          | false 
          | StringChar
-         | ''
+        
                    
 <Void> ::= 
