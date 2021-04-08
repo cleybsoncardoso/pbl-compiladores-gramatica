@@ -1,31 +1,27 @@
 "Name"     = 'MI - Compiladores'
 "Author"   = 'Esdras Abreu e Kevin Cerqueira'
-"Version"  = '0.0.3'
-"About"    = 'Expressões Lógica e Relacional'
+"Version"  = '0.0.4'
+"About"    = 'Expressões Lógicas'
 
-"Start Symbol" = <Expression>
+"Start Symbol" = <Start Expression>
                
-Identifier    = {Letter}({AlphaNumeric} | '_')*
+<Start Expression> ::= <Expression> ';' 
+                   
+Identifier = {Letter}({AlphaNumeric} | '_')*         
                
-<Logical Operator>    ::= '&&'
-                        | '||'
-                        | '!'
+<Logical Operator>  ::= '&&'
+                      | '||'
+                                        
+<Expression> ::=  <Logic Expression> 
+               | '!' <Expression>  
 
-<Relational Operator> ::= '<' 
-                        | '>' 
-                        | '==' 
-                        | '!=' 
-                        | '<='
-                        | '>='
-              
-<Expression> ::= <Relational Expression> 
-               | <Logic Expression>
+<Boolean Literal> ::= 'true'
+                    | 'false'
 
-<Relational Expression>  ::= <Expression> <Relational Operator> <Expression> 
-            
-<Logic Expression>  ::= <Expression> <Logical Operator> <Expression> 
-               |  '!' <Logic Expression>  
-               |  '!' <Relational Expression>
-               
-<Value>       ::= Identifier
-               |  '(' <Expression> ')'
+<Boolean> ::= <Boolean Literal>         
+            | Identifier
+                                                  
+<Logic Expression> ::= <Boolean>  <Logical Operator>  <Boolean> 
+                    | <Expression> <Logical Operator>  <Boolean> 
+                    | <Boolean> <Logical Operator> <Expression>
+                    | '!' <Boolean>
