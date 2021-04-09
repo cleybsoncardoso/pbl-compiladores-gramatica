@@ -39,7 +39,7 @@ Comment Line  = '//'
 ! Start 
 ! ===================================================================
 
-<Program> ::= <Var><Decls><Start> 
+<Program> ::= <Const><Var><Decls><Start> 
 
 <Start> ::= 'start(){' <Body> '}' <Decls> 
         
@@ -115,10 +115,8 @@ Comment Line  = '//'
         | boolean 
         | string
 <Value> ::= <Number>
-         | true 
-         | false 
-         | StringChar
-         
+         | <Boolean Literal> 
+         | StringLiteral
                    
 <Void> ::=             
 ! ===================================================================
@@ -138,9 +136,8 @@ Comment Line  = '//'
         | boolean 
         | string
 <Value> ::= <Number> 
-         | true 
-         | false 
-         | StringChar
+         | <Boolean Literal>  
+         | StringLiteral
          | ''
                    
 <Void> ::= 
