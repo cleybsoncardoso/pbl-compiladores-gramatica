@@ -95,6 +95,12 @@ Comment Line  = '//'
 ! Type Declaration
 ! ===================================================================
 
+<Typedef Decl> ::= typedef <Base> Identifier ';'
+
+<Base> ::= <Type>
+        | struct Identifier 
+        | struct '{' <Struct Def> '}'  
+
 <Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  ';' 
 
 <Struct Def>   ::= <Var> <Struct Def>
@@ -117,8 +123,7 @@ Comment Line  = '//'
 <Value> ::= <Number>
          | <Boolean Literal> 
          | StringLiteral
-                   
-<Void> ::=             
+                               
 ! ===================================================================
 ! Variable Declaration
 ! ===================================================================
@@ -178,7 +183,7 @@ Comment Line  = '//'
 ! ===================================================================
 ! Statements
 ! ===================================================================
-<Body>        ::=   <Body> <Body Item> 
+<Body>        ::=  <Body><Body Item> 
                  |  
               
 <Body Item>  ::=  <Var>
@@ -188,13 +193,14 @@ Comment Line  = '//'
                  | <Print>
                  | <Normal Stm>
                  | <Function Call>
-                 
+                 | <Return Statement>
 
+<Return Statement> ::= 'return' ';'
+                       | 'return' <Normal Stm> ';'
+                 
 ! ===================================================================
 ! Logical Expressions 
 ! ===================================================================
-
-<Relational Expression> ::= 'toImplementRelational'
 
 <Conditional Operator>  ::= '&&'
                       | '||' 
