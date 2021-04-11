@@ -1,3 +1,4 @@
+﻿
 ﻿! -----------------------------------------------------------------------
 ! Gramatica Desenvolvida para disciplina 
 ! EXA869 - MI Processadores de Linguagem de Programação
@@ -95,6 +96,12 @@ Comment Line  = '//'
 ! Type Declaration
 ! ===================================================================
 
+<Typedef Decl> ::= typedef <Base> Identifier ';'
+
+<Base> ::= <Type>
+        | struct Identifier 
+        | struct '{' <Struct Def> '}'  
+
 <Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  ';' 
 
 <Struct Def>   ::= <Var> <Struct Def>
@@ -117,8 +124,7 @@ Comment Line  = '//'
 <Value> ::= <Number>
          | <Boolean Literal> 
          | StringLiteral
-                   
-<Void> ::=             
+                               
 ! ===================================================================
 ! Variable Declaration
 ! ===================================================================
@@ -178,7 +184,7 @@ Comment Line  = '//'
 ! ===================================================================
 ! Statements
 ! ===================================================================
-<Body>        ::=   <Body> <Body Item> 
+<Body>        ::=  <Body><Body Item> 
                  |  
               
 <Body Item>  ::=  <Var>
@@ -188,13 +194,14 @@ Comment Line  = '//'
                  | <Print>
                  | <Normal Stm>
                  | <Function Call>
-                 
+                 | <Return Statement>
 
+<Return Statement> ::= 'return' ';'
+                       | 'return' <Normal Stm> ';'
+                 
 ! ===================================================================
 ! Logical Expressions 
 ! ===================================================================
-
-<Relational Expression> ::= 'toImplementRelational'
 
 <Conditional Operator>  ::= '&&'
                       | '||' 
@@ -220,16 +227,19 @@ Comment Line  = '//'
                | Identifier '/='  <Assign>
                | <Add Exp>  
 
-<Op Relational> ::= '!=' | '==' | '<' | '>' | '>=' | '<='
-<Relational Expression>  ::= <Relational Expression> <Op Relational> <Expression Value>
-               |  <Expression Value>
+<Relational Expression>  ::= <Add Exp> '>'  <Add Exp> 
+               |  <Add Exp> '<'  <Add Exp> 
+               |  <Add Exp> '<=' <Add Exp> 
+               |  <Add Exp> '>=' <Add Exp>
+               |  <Add Exp> '==' <Add Exp>    !Equal
+               |  <Add Exp> '!=' <Add Exp>    !Not equal
 
-<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
-               |  <Add Exp> '-' <Mult Exp>
-               |  <Mult Exp> 
+<Add Exp>     ::=  <Mult Exp> '+'  <Add Exp>
+               |   <Mult Exp> '-'  <Add Exp>
+               |   <Mult Exp> 
 
-<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
-               |  <Mult Exp> '/' <Negate Exp>  
+<Mult Exp>    ::= <Unary>  '*' <Mult Exp> 
+               |  <Unary> '/' <Mult Exp>  
                |  <Unary>
 
 <Unary>       ::= '++'   <Unary>
@@ -241,12 +251,13 @@ Comment Line  = '//'
 
 !Add more values to the rule below - as needed
 
-<Expression Value>       ::= Identifier
-               | '(' <Relational Expression> ')'
+<Expression Value>     ::= Identifier
+               | '(' < Assign> ')'
                | Identifier '(' ')'          
                | DecLiteral      
                | OctLiteral      
                | HexLiteral       
                | FloatLiteral
+
 
 
