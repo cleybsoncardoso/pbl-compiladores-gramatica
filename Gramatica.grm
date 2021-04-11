@@ -226,16 +226,19 @@ Comment Line  = '//'
                | Identifier '/='  <Assign>
                | <Add Exp>  
 
-<Op Relational> ::= '!=' | '==' | '<' | '>' | '>=' | '<='
-<Relational Expression>  ::= <Relational Expression> <Op Relational> <Expression Value>
-               |  <Expression Value>
+<Relational Expression>  ::= <Add Exp> '>'  <Add Exp> 
+               |  <Add Exp> '<'  <Add Exp> 
+               |  <Add Exp> '<=' <Add Exp> 
+               |  <Add Exp> '>=' <Add Exp>
+               |  <Add Exp> '==' <Add Exp>    !Equal
+               |  <Add Exp> '!=' <Add Exp>    !Not equal
 
-<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
-               |  <Add Exp> '-' <Mult Exp>
-               |  <Mult Exp> 
+<Add Exp>     ::=  <Mult Exp> '+'  <Add Exp>
+               |   <Mult Exp> '-'  <Add Exp>
+               |   <Mult Exp> 
 
-<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
-               |  <Mult Exp> '/' <Negate Exp>  
+<Mult Exp>    ::= <Unary>  '*' <Mult Exp> 
+               |  <Unary> '/' <Mult Exp>  
                |  <Unary>
 
 <Unary>       ::= '++'   <Unary>
@@ -247,8 +250,8 @@ Comment Line  = '//'
 
 !Add more values to the rule below - as needed
 
-<Expression Value>       ::= Identifier
-               | '(' <Relational Expression> ')'
+<Expression Value>     ::= Identifier
+               | '(' < Assign> ')'
                | Identifier '(' ')'          
                | DecLiteral      
                | OctLiteral      
