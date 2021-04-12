@@ -48,6 +48,8 @@ Comment Line  = '//'
 
 <Decl>  ::= <Function Declaration>
           | <Proc Decl>
+          | <Struct Decl>
+          | <Typedef Decl>
 
              
 ! ===================================================================
@@ -103,8 +105,8 @@ Comment Line  = '//'
 
 <Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  ';' 
 
-<Struct Def>   ::= <Var> <Struct Def>
-                 | <Var>
+<Struct Def>   ::= <VariablesList> <Struct Def>
+                 | <VariablesList>
 ! ===================================================================
 ! Constant Declaration
 ! =================================================================== 
