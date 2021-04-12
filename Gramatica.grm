@@ -39,7 +39,7 @@ Comment Line  = '//'
 ! Start 
 ! ===================================================================
 
-<Program> ::= <Const><Var><Decls><Start> 
+<Program> ::= <Const Decl><Var Decl><Decls><Start> 
 
 <Start> ::= 'start(){' <Body> '}' <Decls> 
         
@@ -105,23 +105,24 @@ Comment Line  = '//'
 
 <Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  ';' 
 
-<Struct Def>   ::= <VariablesList> <Struct Def>
-                 | <VariablesList>
+<Struct Def>   ::= 
+
 ! ===================================================================
 ! Constant Declaration
 ! =================================================================== 
-<Const> ::= 'const' '{' <VariablesList> '}'      
+<Const Decl> ::= 'const' '{' <ConstList> '}' |      
               
-<VariablesList> ::= <Type> <Variable> <VariablesList>| <Void>
+<ConstList> ::= <Type> <Const> <ConstList> | 
 
-<Variable> ::= Identifier <Relational> <Value> <Delimiter> 
-<Relational> ::= '='                                                                     
-<Delimiter> ::= ',' <Variable> |';'
+<Const> ::= Identifier '=' <Value> <Delimiter Const> 
+                                                                    
+<Delimiter Const> ::= ',' <Const> |';'
                                                                                   
 <Type> ::= int 
         | real 
         | boolean 
         | string
+        
 <Value> ::= <Number>
          | <Boolean Literal> 
          | StringLiteral
@@ -130,23 +131,14 @@ Comment Line  = '//'
 ! Variable Declaration
 ! ===================================================================
 
-<Var> ::= 'var' '{' <VariablesList> '}'| <Void>
+<Var Decl> ::= 'var' '{' <VariablesList> '}'| 
               
-<VariablesList> ::= <Type> <Variable> <VariablesList> | <Void>
+<VariablesList> ::= <Type> <Variable> <VariablesList> | 
 
-<Variable> ::= Identifier <Relational> <Value> <Delimiter> | Identifier <Delimiter>
-<Relational> ::= '='                                                                     
-<Delimiter> ::= ',' <Variable> |';'
+<Variable> ::= Identifier '=' <Value> <Delimiter Var> | Identifier <Delimiter Var>
+                                                                     
+<Delimiter Var> ::= ',' <Variable> |';'
                                                                                   
-<Type> ::= int 
-        | real 
-        | boolean 
-        | string
-<Value> ::= <Number> 
-         | <Boolean Literal>  
-         | StringLiteral
-         | ''
-                   
 <Void> ::= 
 
 
@@ -188,7 +180,7 @@ Comment Line  = '//'
 <Body>        ::=  <Body><Body Item> 
                  |  
               
-<Body Item>  ::=  <Var>
+<Body Item>  ::=  <Var Decl>
                  | <While>
                  | <If>
                  | <Read>
