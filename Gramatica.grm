@@ -216,16 +216,6 @@ Comment Line  = '//'
 ! ===================================================================
 ! Arithmetic Expressions 
 ! ===================================================================
-
-<Normal Stm> ::= <Assign> ';' 
-              
-<Assign>  ::= Identifier '='   <Assign>
-               | Identifier '+='  <Assign>
-               | Identifier '-='  <Assign>
-               | Identifier '*='  <Assign>
-               | Identifier '/='  <Assign>
-               | <Add Exp>  
-
 <Relational Expression>  ::= <Add Exp> '>'  <Add Exp> 
                |  <Add Exp> '<'  <Add Exp> 
                |  <Add Exp> '<=' <Add Exp> 
@@ -233,25 +223,26 @@ Comment Line  = '//'
                |  <Add Exp> '==' <Add Exp>    !Equal
                |  <Add Exp> '!=' <Add Exp>    !Not equal
 
-<Add Exp>     ::=  <Mult Exp> '+'  <Add Exp>
-               |   <Mult Exp> '-'  <Add Exp>
-               |   <Mult Exp> 
+<Normal Stm> ::= <Assign> ';'
 
-<Mult Exp>    ::= <Unary>  '*' <Mult Exp> 
-               |  <Unary> '/' <Mult Exp>  
-               |  <Unary>
+<Assign> := identifier '=' <Exp>
+            | <Exp>
+              
+<Exp> ::= <Term> <Add Exp>
+                      
+<Add Exp>     ::=  '+'  <Exp>
+               |   '-'  <Exp> 
+               | <Void>
 
-<Unary>       ::= '++'   <Unary>
-               | '--'   <Unary>
-               | <Negate Exp>               
+<Term> ::= <Expression Value> <Mult Exp>
 
-<Negate Exp>  ::= '-' <Expression Value> 
-               |  <Expression Value> 
+<Mult Exp>    ::= '*' <Term> 
+               |  '/' <Term>  
+               |  <Void>
 
-!Add more values to the rule below - as needed
-
-<Expression Value>     ::= Identifier
-               | '(' < Assign> ')'
+<Expression Value>  ::= '-' <Expression Value> 
+               |  Identifier
+               | '(' <Exp> ')'
                | Identifier '(' ')'          
                | DecLiteral      
                | OctLiteral      
