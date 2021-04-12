@@ -216,16 +216,18 @@ Comment Line  = '//'
 ! ===================================================================
 ! Arithmetic Expressions 
 ! ===================================================================
-<Relational Expression>  ::= <Add Exp> '>'  <Add Exp> 
-               |  <Add Exp> '<'  <Add Exp> 
-               |  <Add Exp> '<=' <Add Exp> 
-               |  <Add Exp> '>=' <Add Exp>
-               |  <Add Exp> '==' <Add Exp>    !Equal
-               |  <Add Exp> '!=' <Add Exp>    !Not equal
+<Relational Expression>  ::= <Exp> <Relational>   
+               
+<Relational> ::= '>'  <Exp> 
+               |  '<'  <Exp> 
+               |  '<=' <Exp> 
+               |  '>=' <Exp>
+               |  '==' <Exp>    !Equal
+               |  '!=' <Exp>    !Not equal
 
 <Normal Stm> ::= <Assign> ';'
 
-<Assign> := identifier '=' <Exp>
+<Assign> ::= identifier '=' <Exp>
             | <Exp>
               
 <Exp> ::= <Term> <Add Exp>
