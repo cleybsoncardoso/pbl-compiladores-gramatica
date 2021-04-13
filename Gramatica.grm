@@ -242,4 +242,30 @@ Comment Line  = '//'
                | Identifier '()'         
                |<Boolean Literal> 
                |StringLiteral
+               
+! ===================================================================
+! Matrix/Array Declaration
+! ===================================================================
 
+
+<index> ::= int | Identifier
+<declaration> ::= Type Identifier <derived_matrix_vector> <declaration_aux>';' 
+<declaration_aux> ::=  
+<derived_matrix_vector> ::= <vector> | <matrix>
+<vector> ::= '['<index>']'     
+<matrix> ::= '['<index>']' <vector>  
+
+! ===================================================================
+! Matrix/Array Atribuition
+! ===================================================================
+
+<assignment_vector> ::= <assignment_vector_aux1> | <assignment_vector_aux2> 
+<assignment_vector_aux1> ::= '['<index>']' '=' <Value>
+<assignment_vector_aux2> ::= '[' ']' '=' '{'<Value>'}'
+<value_assigned_vector> ::= <Value> ',' <valor_assigned_vector> | <Value>
+
+<assignment_matriz> ::= <assignment_matriz_aux1> | <assignment_matriz_aux2>
+<assignment_matriz_aux1> ::= '['<index>']' <assignment_vector_aux1>      
+<assignment_matriz_aux2> ::= '[' ']' '[' ']' '=' '{' '{' <valor_assigned_matriz> '}' <dimensao_matriz2>
+<dimensao_matriz2> ::= ',' '{'<valor_assigned_matriz> '}' '}'
+<valor_assigned_matriz> ::= <Value> ',' <valor_assigned_matriz> | <Value>
