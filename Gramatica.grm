@@ -133,7 +133,7 @@ Comment Line  = '//'
 
 <Var Decl> ::= 'var' '{' <VariablesList> '}'
 <index> ::= DecLiteral | Identifier             
-<VariablesList> ::= <Type> <Variable> <VariablesList>  
+<VariablesList> ::= <Type> <Variable> <VariablesList> |  
 <Variable> ::= Identifier<Aux>  
 <Aux> ::= '=' <Value> <Delimiter Var> | <Delimiter Var>|  <derived_matrix_vector> <declaration_aux><Delimiter Var>                                                                
 <Delimiter Var> ::= ',' <Variable> |';'
