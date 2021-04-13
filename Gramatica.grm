@@ -223,6 +223,7 @@ Comment Line  = '//'
                     | <Relational Expression> <Conditional Operator> <Logical Expression>
                     | '!' <Logical Expression>
                     | '!' <Relational Expression>
+                    | '!' Identifier
                       
 ! ===================================================================
 ! Arithmetic Expressions 
