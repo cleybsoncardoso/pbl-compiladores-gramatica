@@ -71,8 +71,8 @@ Comment Line  = '//'
 ! Function  Declaration
 ! ==================================================================
 
-<Function Declaration> ::= 'function' Identifier '(' <Params> ')' '{' <Body> '}'
-                        
+
+<Function Declaration> ::= 'function' <Type> Identifier '(' <Params> ')' '{' <Body> '}'
 
 ! ===================================================================
 ! Procedure  Declaration
