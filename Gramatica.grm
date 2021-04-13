@@ -132,11 +132,15 @@ Comment Line  = '//'
 ! ==================================================================
 
 <Var Decl> ::= 'var' '{' <VariablesList> '}'
-              
-<VariablesList> ::= <Type> <Variable> <VariablesList> | 
+<index> ::= DecLiteral | Identifier             
+<VariablesList> ::= <Type> <Variable> <VariablesList>  
 <Variable> ::= Identifier<Aux>  
-<Aux> ::= '=' <Value> <Delimiter Var> | <Delimiter Var>                                                                  
+<Aux> ::= '=' <Value> <Delimiter Var> | <Delimiter Var>|  <derived_matrix_vector> <declaration_aux><Delimiter Var>                                                                
 <Delimiter Var> ::= ',' <Variable> |';'
+<declaration_aux> ::=  
+<derived_matrix_vector> ::= <vector> | <matrix>
+<vector> ::= '['<index>']'     
+<matrix> ::= '['<index>']' <vector>  
 
 
 ! ===================================================================
@@ -242,17 +246,6 @@ Comment Line  = '//'
                |<Boolean Literal> 
                |StringLiteral
                
-! ===================================================================
-! Matrix/Array Declaration
-! ===================================================================
-
-
-<index> ::= int | Identifier
-<declaration> ::= Type Identifier <derived_matrix_vector> <declaration_aux>';' 
-<declaration_aux> ::=  
-<derived_matrix_vector> ::= <vector> | <matrix>
-<vector> ::= '['<index>']'     
-<matrix> ::= '['<index>']' <vector>  
 
 ! ===================================================================
 ! Matrix/Array Atribuition
