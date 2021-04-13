@@ -1,0 +1,37 @@
+
+const {
+   string coach = "comece seu dia com uma atitude positiva";
+   boolean atitude = true;
+   int num_participantes = 0;
+}
+
+var {
+   int a, b, c = 1;
+   int x = 22;
+}
+
+function int lucro (int a, int b) {
+   var {
+    int participante_pago;
+   }
+   local.participante_pago = a * b;
+   return local.participante_pago;
+}
+ 
+procedure exibeLucro(int a, float b) {
+   var {
+     float resultado = a * b ;
+   }
+   print (resultado);
+}
+
+start() {
+   var {
+     int numero_vagas = 100;
+     int valor =45;
+     float percentual = 0.25;
+
+   }
+  exibeLucro(local.valor_45, local.percentual);
+  print(coach);
+}   

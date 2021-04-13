@@ -41,7 +41,7 @@ Comment Line  = '//'
 
 <Program> ::= <Const Decl><Var Decl><Decls><Start> 
 
-<Start> ::= 'start' '(' ')' '{' <Body> '}' <Decls> 
+<Start> ::= 'start' '()' '{' <Body> '}' <Decls> 
         
 <Decls> ::= <Decl> <Decls> | 
           
