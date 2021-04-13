@@ -41,7 +41,7 @@ Comment Line  = '//'
 
 <Program> ::= <Const Decl><Var Decl><Decls><Start> 
 
-<Start> ::= 'start' '()' '{' <Body> '}' <Decls> 
+<Start> ::= 'start' '()' '{' <Body Procedure> '}' <Decls> 
         
 <Decls> ::= <Decl> <Decls> | 
           
@@ -78,8 +78,8 @@ Comment Line  = '//'
 ! Procedure  Declaration
 ! ===================================================================               
 
-<Proc Decl> ::= 'procedure' Identifier '(' <Params> ')' '{' <Body> '}'
-              | Identifier '(' <Formal Parameter List> ')' '{' <Body> '}'
+<Proc Decl> ::= 'procedure' Identifier '(' <Params> ')' '{' <Body Procedure> '}'
+              | Identifier '(' <Formal Parameter List> ')' '{' <Body Procedure> '}'
 
 <Params>     ::= <Param> ',' <Params>
                | <Param> | 
@@ -148,6 +148,8 @@ Comment Line  = '//'
 
 <While> ::= 'while' '(' <Conditional Expression> ')' '{' <Body> '}'
          
+<While Procedure> ::= 'while' '(' <Conditional Expression> ')' '{' <Body Procedure> '}'
+         
 <Boolean Literal> ::= 'true'
                     | 'false'
 
@@ -162,6 +164,10 @@ Comment Line  = '//'
 <If> ::= 'if' '(' <Conditional Expression><Then> 
 <Then> ::= ')' 'then' '{'<Body>'}' <Else>
 <Else> ::= 'else' '{' <Body> '}' | 
+        
+<If Procedure> ::= 'if' '(' <Conditional Expression><Then Procedure> 
+<Then Procedure> ::= ')' 'then' '{'<Body Procedure>'}' <Else Procedure>
+<Else Procedure> ::= 'else' '{' <Body Procedure> '}' | 
 
 ! ===================================================================
 ! read
@@ -191,6 +197,17 @@ Comment Line  = '//'
 
 <Return Statement> ::= 'return' ';'
                        | 'return' <Normal Stm>
+                       
+<Body Procedure>  ::=  <Body Procedure><Body Item Procedure> 
+                 |  
+              
+<Body Item Procedure>  ::=  <Var Decl>
+                 | <While Procedure>
+                 | <If Procedure>
+                 | <Read>
+                 | <Print>
+                 | <Normal Stm>
+                 | <Function Call>
                  
 ! ===================================================================
 ! Logical Expressions 
@@ -206,6 +223,7 @@ Comment Line  = '//'
                     | <Relational Expression> <Conditional Operator> <Logical Expression>
                     | '!' <Logical Expression>
                     | '!' <Relational Expression>
+                    | '!' Identifier
                       
 ! ===================================================================
 ! Arithmetic Expressions 
