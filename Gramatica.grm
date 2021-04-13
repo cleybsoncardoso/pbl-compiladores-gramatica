@@ -41,9 +41,9 @@ Comment Line  = '//'
 
 <Program> ::= <Const Decl><Var Decl><Decls><Start> 
 
-<Start> ::= 'start(){' <Body> '}' <Decls> 
+<Start> ::= 'start' '(' ')' '{' <Body> '}' <Decls> 
         
-<Decls> ::= <Decl> <Decls> | <Void>
+<Decls> ::= <Decl> <Decls> | 
           
 
 <Decl>  ::= <Function Declaration>
@@ -138,8 +138,6 @@ Comment Line  = '//'
 <Variable> ::= Identifier '=' <Value> <Delimiter Var> | Identifier <Delimiter Var>
                                                                      
 <Delimiter Var> ::= ',' <Variable> |';'
-                                                                                  
-<Void> ::= 
 
 
 ! ===================================================================
@@ -159,9 +157,9 @@ Comment Line  = '//'
 ! if - then - else
 ! =================================================================== 
 
-<If> ::= 'if(' <Conditional Expression><Then> 
-<Then> ::= ')then{'<Body>'}'<Else>
-<Else> ::= 'else{' <Body> '}' | <Void>
+<If> ::= 'if' '(' <Conditional Expression><Then> 
+<Then> ::= ')' 'then' '{'<Body>'}' <Else>
+<Else> ::= 'else' '{' <Body> '}' | 
 
 ! ===================================================================
 ! read
@@ -190,7 +188,7 @@ Comment Line  = '//'
                  | <Return Statement>
 
 <Return Statement> ::= 'return' ';'
-                       | 'return' <Normal Stm> ';'
+                       | 'return' <Normal Stm>
                  
 ! ===================================================================
 ! Logical Expressions 
@@ -228,13 +226,13 @@ Comment Line  = '//'
                       
 <Add Exp>     ::=  '+'  <Exp>
                |   '-'  <Exp> 
-               | <Void>
+               | 
 
 <Term> ::= <Expression Value> <Mult Exp>
 
 <Mult Exp>    ::= '*' <Term> 
                |  '/' <Term>  
-               |  <Void>
+               |
 
 <Expression Value>  ::= '-' <Expression Value> 
                |  Identifier
