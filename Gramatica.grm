@@ -1,7 +1,7 @@
-﻿! -----------------------------------------------------------------------
+﻿! ===================================================================
 ! Gramatica Desenvolvida para disciplina 
 ! EXA869 - MI Processadores de Linguagem de Programação
-! -----------------------------------------------------------------------
+! ===================================================================
 
 
 "Case Sensitive" = True
@@ -24,7 +24,7 @@ FloatLiteral     = {Digit}*'.'{Digit}+
           | OctLiteral 
           | HexLiteral 
           | FloatLiteral
-
+<PrefixGlobalLocal> ::= 'global.' | 'local.' 
 
 ! ===================================================================
 ! Comments
@@ -69,7 +69,7 @@ Comment Line  = '//'
              
 ! ===================================================================
 ! Function  Declaration
-! ===================================================================
+! ==================================================================
 
 <Function Declaration> ::= 'function' Identifier '(' <Params> ')' '{' <Body> '}'
                         
@@ -110,9 +110,9 @@ Comment Line  = '//'
 ! ===================================================================
 ! Constant Declaration
 ! =================================================================== 
-<Const Decl> ::= 'const' '{' <ConstList> '}' |      
+<Const Decl> ::= 'const' '{' <ConstList> '}' 
               
-<ConstList> ::= <Type> <Const> <ConstList> | 
+<ConstList> ::= <Type> <Const> <ConstList> | <Void> 
 
 <Const> ::= Identifier '=' <Value> <Delimiter Const> 
                                                                     
@@ -129,11 +129,11 @@ Comment Line  = '//'
                                
 ! ===================================================================
 ! Variable Declaration
-! ===================================================================
+! ==================================================================
 
-<Var Decl> ::= 'var' '{' <VariablesList> '}'| 
+<Var Decl> ::= 'var' '{' <VariablesList> '}'
               
-<VariablesList> ::= <Type> <Variable> <VariablesList> | 
+<VariablesList> ::= <Type> <Variable> <VariablesList> | <Void> 
 
 <Variable> ::= Identifier '=' <Value> <Delimiter Var> | Identifier <Delimiter Var>
                                                                      
@@ -217,9 +217,10 @@ Comment Line  = '//'
                |  '==' <Exp>    !Equal
                |  '!=' <Exp>    !Not equal
 
-<Normal Stm> ::= <Assign> ';'
+<Normal Stm> ::= <AssignAux> ';'
 
-<Assign> ::= identifier '=' <Exp>
+<AssignAux>::= <PrefixGlobalLocal><Assign> | <Assign> 
+<Assign> ::= Identifier '=' <Exp>
             | <Exp>
               
 <Exp> ::= <Term> <Add Exp>
@@ -237,10 +238,8 @@ Comment Line  = '//'
 <Expression Value>  ::= '-' <Expression Value> 
                |  Identifier
                | '(' <Exp> ')'
-               | Identifier '(' ')'          
-               | DecLiteral      
-               | OctLiteral      
-               | HexLiteral       
-               | FloatLiteral
-
+               | <Number>
+               | Identifier '()'         
+               |<Boolean Literal> 
+               |StringLiteral
 

@@ -6,21 +6,31 @@
 !Terminal
 !-------------------------------------------------- 
 {String Char} = {Printable} - ["] 
-Identifier = (('global'|'local')'.')?{Letter}({AlphaNumeric} | [_])*
 Number = {Digit}+('.'{Digit}+)?
 StringChar  = '"'{String Char}*'"'
-!--------------------------------------------------               
-!Rules
-!-------------------------------------------------- 
-
+Identifier    = {Letter}({AlphaNumeric} | '_')*
+      
+<UseIdentifier> ::= Identifier
+                 |global'.'Identifier
+                 |local'.'Identifier            
+                 
 <UseVariable> ::= <VariablesList>     
               
 <VariablesList> ::= <Variable> <VariablesList> | <Void>
 
-<Variable> ::= Identifier <Relational> <Value> <Delimiter> | Identifier <Delimiter>
+<Variable> ::= <UseIdentifier> <Relational> <Value> <Delimiter> |<UseIdentifier><Delimiter>
 <Relational> ::= '='                                                                     
 <Delimiter> ::= ';'
                                                                                   
-<Type> ::= int | real | boolean | string
-<Value> ::= Number | true | false | StringChar| ''          
+<Type> ::= int 
+        | real 
+        | boolean 
+        | string
+<Value> ::= Number 
+         |true
+         |false
+         | StringChar
+         |<UseIdentifier>
+        
 <Void> ::= 
+                 
