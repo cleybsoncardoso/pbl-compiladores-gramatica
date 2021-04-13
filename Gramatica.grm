@@ -261,10 +261,11 @@ Comment Line  = '//'
 <assignment_vector> ::= <assignment_vector_aux1> | <assignment_vector_aux2> 
 <assignment_vector_aux1> ::= '['<index>']' '=' <Value>
 <assignment_vector_aux2> ::= '[' ']' '=' '{'<Value>'}'
-<value_assigned_vector> ::= <Value> ',' <valor_assigned_vector> | <Value>
+<value_assigned_vector> ::= <Value> ',' <value_assigned_vector> | <Value>
 
 <assignment_matrix> ::= <assignment_matrix_aux1> | <assignment_matrix_aux2>
 <assignment_matrix_aux1> ::= '['<index>']' <assignment_vector_aux1>      
 <assignment_matrix_aux2> ::= '[' ']' '[' ']' '=' '{' '{' <value_assigned_matrix> '}' <dimensao_matrix2>
 <dimensao_matrix2> ::= ',' '{'<value_assigned_matrix> '}' '}'
 <value_assigned_matrix> ::= <Value> ',' <value_assigned_matrix> | <Value>
+
