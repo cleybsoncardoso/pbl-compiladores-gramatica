@@ -112,7 +112,7 @@ Comment Line  = '//'
 ! =================================================================== 
 <Const Decl> ::= 'const' '{' <ConstList> '}' 
               
-<ConstList> ::= <Type> <Const> <ConstList> | <Void> 
+<ConstList> ::= <Type> <Const> <ConstList> |  
 
 <Const> ::= Identifier '=' <Value> <Delimiter Const> 
                                                                     
@@ -133,7 +133,7 @@ Comment Line  = '//'
 
 <Var Decl> ::= 'var' '{' <VariablesList> '}'
               
-<VariablesList> ::= <Type> <Variable> <VariablesList> | <Void> 
+<VariablesList> ::= <Type> <Variable> <VariablesList> | 
 
 <Variable> ::= Identifier '=' <Value> <Delimiter Var> | Identifier <Delimiter Var>
                                                                      
