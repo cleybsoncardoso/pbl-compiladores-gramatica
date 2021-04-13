@@ -134,9 +134,8 @@ Comment Line  = '//'
 <Var Decl> ::= 'var' '{' <VariablesList> '}'
               
 <VariablesList> ::= <Type> <Variable> <VariablesList> | 
-
-<Variable> ::= Identifier '=' <Value> <Delimiter Var> | Identifier <Delimiter Var>
-                                                                     
+<Variable> ::= Identifier<Aux>  
+<Aux> ::= '=' <Value> <Delimiter Var> | <Delimiter Var>                                                                  
 <Delimiter Var> ::= ',' <Variable> |';'
 
 
