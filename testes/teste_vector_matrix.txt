@@ -1,0 +1,18 @@
+var {
+   int v[5];
+   int m[5][1];
+}
+
+const {
+    int x = 1;
+}
+
+
+start() {
+   var {
+     int valor = 5;
+   }
+   m[0][0] = 0;
+   v[0] = m[0][0];
+   v[1] = x;
+}
