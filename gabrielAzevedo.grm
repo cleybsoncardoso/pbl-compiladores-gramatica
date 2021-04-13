@@ -25,6 +25,8 @@ StringLiteral = '"' {String Chars}* '"'
 ! The grammar starts below
 <Program> ::= 
 
+<Extends>                     ::= 'extends' Identifier |
+
 <Expression>  ::= <Expression> '+' <Mult Exp> 
                |  <Expression> '-' <Mult Exp> 
                |  <Mult Exp> 
