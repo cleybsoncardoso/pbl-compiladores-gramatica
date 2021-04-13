@@ -110,15 +110,9 @@ Comment Line  = '//'
 ! ===================================================================
 ! Constant Declaration
 ! =================================================================== 
-<<<<<<< HEAD
 <Const Decl> ::= 'const' '{' <ConstList> '}' 
               
 <ConstList> ::= <Type> <Const> <ConstList> | <Void> 
-=======
-<Const Decl> ::= 'const' '{' <ConstList> '}' |      
-              
-<ConstList> ::= <Type> <Const> <ConstList> | 
->>>>>>> 5af6f8a721041dea606fd73287573486ab0687ad
 
 <Const> ::= Identifier '=' <Value> <Delimiter Const> 
                                                                     
@@ -137,15 +131,9 @@ Comment Line  = '//'
 ! Variable Declaration
 ! ==================================================================
 
-<<<<<<< HEAD
 <Var Decl> ::= 'var' '{' <VariablesList> '}'
               
 <VariablesList> ::= <Type> <Variable> <VariablesList> | <Void> 
-=======
-<Var Decl> ::= 'var' '{' <VariablesList> '}'| 
-              
-<VariablesList> ::= <Type> <Variable> <VariablesList> | 
->>>>>>> 5af6f8a721041dea606fd73287573486ab0687ad
 
 <Variable> ::= Identifier '=' <Value> <Delimiter Var> | Identifier <Delimiter Var>
                                                                      
@@ -231,16 +219,10 @@ Comment Line  = '//'
                |  '==' <Exp>    !Equal
                |  '!=' <Exp>    !Not equal
 
-<<<<<<< HEAD
 <Normal Stm> ::= <AssignAux> ';'
 
 <AssignAux>::= <PrefixGlobalLocal><Assign> | <Assign> 
 <Assign> ::= Identifier '=' <Exp>
-=======
-<Normal Stm> ::= <Assign> ';'
-
-<Assign> ::= identifier '=' <Exp>
->>>>>>> 5af6f8a721041dea606fd73287573486ab0687ad
             | <Exp>
               
 <Exp> ::= <Term> <Add Exp>
@@ -258,17 +240,8 @@ Comment Line  = '//'
 <Expression Value>  ::= '-' <Expression Value> 
                |  Identifier
                | '(' <Exp> ')'
-<<<<<<< HEAD
                | <Number>
                | Identifier '()'         
                |<Boolean Literal> 
                |StringLiteral
-=======
-               | Identifier '(' ')'          
-               | DecLiteral      
-               | OctLiteral      
-               | HexLiteral       
-               | FloatLiteral
-
->>>>>>> 5af6f8a721041dea606fd73287573486ab0687ad
 
