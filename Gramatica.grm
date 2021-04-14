@@ -132,15 +132,26 @@ Comment Line  = '//'
 ! Variable Declaration
 ! ==================================================================
 
-<Var Decl> ::= 'var' '{' <VariablesList> '}'
-<Index> ::= DecLiteral | Identifier             
+<Var Decl> ::= 'var' '{' <VariablesList> '}'         
 <VariablesList> ::= <Type> <Variable> <VariablesList> |  
 <Variable> ::= Identifier<Aux>  
-<Aux> ::= '=' <Value> <Delimiter Var> | <Delimiter Var>|  <Derived_matrix_vector><Delimiter Var>                                                                
+<Aux> ::= '=' <Value> <Delimiter Var> | <Delimiter Var>|  <Vector><Assignment_vector><Delimiter Var>  | <Matrix><Assignment_matrix><Delimiter Var>                                                   
 <Delimiter Var> ::= ',' <Variable> |';'
-<Derived_matrix_vector> ::= <Vector> | <Matrix>
+                 
+<Index> ::= DecLiteral | Identifier    
 <Vector> ::= '['<Index>']'     
 <Matrix> ::= '['<Index>']' <Vector>  
+          
+<Assignment_vector> ::= <Assignment_vector_aux1> | <Assignment_vector_aux2> |
+<Assignment_vector_aux1> ::= '=' <Value>
+<Assignment_vector_aux2> ::= '=' '{'<Value_assigned_vector>'}'
+<Value_assigned_vector> ::= <Value> ',' <Value_assigned_vector> | <Value>
+
+<Assignment_matrix> ::= <Assignment_matrix_aux1> | <Assignment_matrix_aux2> |
+<Assignment_matrix_aux1> ::=  <Assignment_vector_aux1>      
+<assignment_matrix_aux2> ::=  '=' '{' '{' <Value_assigned_matrix> '}' <Dimensao_matrix2>
+<Dimensao_matrix2> ::= ',' '{'<Value_assigned_matrix> '}' '}'
+<Value_assigned_matrix> ::= <Value> ',' <Value_assigned_matrix> | <Value> 
 
 
 ! ===================================================================
@@ -263,20 +274,3 @@ Comment Line  = '//'
                | Identifier '()'         
                |<Boolean Literal> 
                |StringLiteral
-               
-
-! ===================================================================
-! Matrix/Array Atribuition
-! ===================================================================
-
-<Assignment_vector> ::= <Assignment_vector_aux1> | <Assignment_vector_aux2> 
-<Assignment_vector_aux1> ::= '['<Index>']' '=' <Value>
-<Assignment_vector_aux2> ::= '[' ']' '=' '{'<Value>'}'
-<Value_assigned_vector> ::= <Value> ',' <Value_assigned_vector> | <Value>
-
-<Assignment_matrix> ::= <Assignment_matrix_aux1> | <Assignment_matrix_aux2>
-<Assignment_matrix_aux1> ::= '['<Index>']' <Assignment_vector_aux1>      
-<assignment_matrix_aux2> ::= '[' ']' '[' ']' '=' '{' '{' <Value_assigned_matrix> '}' <Dimensao_matrix2>
-<Dimensao_matrix2> ::= ',' '{'<Value_assigned_matrix> '}' '}'
-<Value_assigned_matrix> ::= <Value> ',' <Value_assigned_matrix> | <Value>
-
