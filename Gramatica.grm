@@ -96,7 +96,7 @@ Comment Line  = '//'
 ! Function n Procedures call
 ! ===================================================================
 
-<Function Call> ::= Identifier '(' <Formal Parameter List>');'
+<Function Call> ::= Identifier '(' <Formal Parameter List> ')'
 
 ! ===================================================================
 ! Type Declaration
@@ -210,7 +210,6 @@ Comment Line  = '//'
                  | <Read>
                  | <Print>
                  | <Normal Stm>
-                 | <Function Call>
                  | <Return Statement>
 
 <Return Statement> ::= 'return' ';'
@@ -225,7 +224,6 @@ Comment Line  = '//'
                  | <Read>
                  | <Print>
                  | <Normal Stm>
-                 | <Function Call>
                  
 ! ===================================================================
 ! Logical Expressions 
@@ -258,7 +256,6 @@ Comment Line  = '//'
 <Normal Stm> ::= <PrefixGlobalLocal><Assign> | <Assign> 
 
 <Assign> ::= Identifier '=' <Exp> ';'
-            | Identifier '=' <Function Call>
             | <Exp> ';'
               
 <Exp> ::= <Term> <Add Exp>
@@ -275,8 +272,7 @@ Comment Line  = '//'
 
 <Expression Value>  ::= '-' <Expression Value> 
                |  Identifier
-               | '(' <Exp> ')'
-               | <Number>
-               | Identifier '()'         
-               |<Boolean Literal> 
-               |StringLiteral
+               | <Number>        
+               | <Boolean Literal> 
+               | StringLiteral
+               | <Function Call>
