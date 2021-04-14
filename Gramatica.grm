@@ -39,9 +39,14 @@ Comment Line  = '//'
 ! Start 
 ! ===================================================================
 
-<Program> ::= <Const Decl><Var Decl><Decls><Start> 
+<Program> ::= <Global Decl><Decls><Start> 
+<Global Decl> ::= <Const Decl> 
+                | <Var Decl> 
+                | <Const Decl><Var Decl>  
+                | <Var Decl><Const Decl>               
+                |
 
-<Start> ::= 'start' '()' '{' <Body> '}' <Decls> 
+<Start> ::= 'start' '()' '{' <Body Procedure> '}' <Decls> 
         
 <Decls> ::= <Decl> <Decls> | 
           
@@ -71,15 +76,15 @@ Comment Line  = '//'
 ! Function  Declaration
 ! ==================================================================
 
-<Function Declaration> ::= 'function' Identifier '(' <Params> ')' '{' <Body> '}'
-                        
+
+<Function Declaration> ::= 'function' <Type> Identifier '(' <Params> ')' '{' <Body> '}'
 
 ! ===================================================================
 ! Procedure  Declaration
 ! ===================================================================               
 
-<Proc Decl> ::= 'procedure' Identifier '(' <Params> ')' '{' <Body> '}'
-              | Identifier '(' <Formal Parameter List> ')' '{' <Body> '}'
+<Proc Decl> ::= 'procedure' Identifier '(' <Params> ')' '{' <Body Procedure> '}'
+              | Identifier '(' <Formal Parameter List> ')' '{' <Body Procedure> '}'
 
 <Params>     ::= <Param> ',' <Params>
                | <Param> | 
@@ -100,7 +105,6 @@ Comment Line  = '//'
 <Typedef Decl> ::= typedef <Base> Identifier ';'
 
 <Base> ::= <Type>
-        | struct Identifier 
         | struct '{' <Struct Def> '}'  
 
 <Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  
@@ -123,7 +127,8 @@ Comment Line  = '//'
         | real 
         | boolean 
         | string
-        | <Struct Decl>  
+        | struct Identifier 
+        | Identifier
 
 <Value> ::= <Number>
          | <Boolean Literal> 
@@ -133,15 +138,26 @@ Comment Line  = '//'
 ! Variable Declaration
 ! ==================================================================
 
-<Var Decl> ::= 'var' '{' <VariablesList> '}'
-<Index> ::= DecLiteral | Identifier             
+<Var Decl> ::= 'var' '{' <VariablesList> '}'         
 <VariablesList> ::= <Type> <Variable> <VariablesList> |  
 <Variable> ::= Identifier<Aux>  
-<Aux> ::= '=' <Value> <Delimiter Var> | <Delimiter Var>|  <Derived_matrix_vector><Delimiter Var>                                                                
+<Aux> ::= '=' <Value> <Delimiter Var> | <Delimiter Var>|  <Vector><Assignment_vector><Delimiter Var>  | <Matrix><Assignment_matrix><Delimiter Var>                                                   
 <Delimiter Var> ::= ',' <Variable> |';'
-<Derived_matrix_vector> ::= <Vector> | <Matrix>
+                 
+<Index> ::= DecLiteral|OctLiteral| Identifier    
 <Vector> ::= '['<Index>']'     
 <Matrix> ::= '['<Index>']' <Vector>  
+          
+<Assignment_vector> ::= <Assignment_vector_aux1> | <Assignment_vector_aux2> |
+<Assignment_vector_aux1> ::= '=' <Value>
+<Assignment_vector_aux2> ::= '=' '{'<Value_assigned_vector>'}'
+<Value_assigned_vector> ::= <Value> ',' <Value_assigned_vector> | <Value>
+
+<Assignment_matrix> ::= <Assignment_matrix_aux1> | <Assignment_matrix_aux2> |
+<Assignment_matrix_aux1> ::=  <Assignment_vector_aux1>      
+<assignment_matrix_aux2> ::=  '=' '{' '{' <Value_assigned_matrix> '}' <Dimensao_matrix2>
+<Dimensao_matrix2> ::= ',' '{'<Value_assigned_matrix> '}' '}'
+<Value_assigned_matrix> ::= <Value> ',' <Value_assigned_matrix> | <Value> 
 
 
 ! ===================================================================
@@ -149,6 +165,8 @@ Comment Line  = '//'
 ! ===================================================================
 
 <While> ::= 'while' '(' <Conditional Expression> ')' '{' <Body> '}'
+         
+<While Procedure> ::= 'while' '(' <Conditional Expression> ')' '{' <Body Procedure> '}'
          
 <Boolean Literal> ::= 'true'
                     | 'false'
@@ -164,6 +182,10 @@ Comment Line  = '//'
 <If> ::= 'if' '(' <Conditional Expression><Then> 
 <Then> ::= ')' 'then' '{'<Body>'}' <Else>
 <Else> ::= 'else' '{' <Body> '}' | 
+        
+<If Procedure> ::= 'if' '(' <Conditional Expression><Then Procedure> 
+<Then Procedure> ::= ')' 'then' '{'<Body Procedure>'}' <Else Procedure>
+<Else Procedure> ::= 'else' '{' <Body Procedure> '}' | 
 
 ! ===================================================================
 ! read
@@ -193,6 +215,17 @@ Comment Line  = '//'
 
 <Return Statement> ::= 'return' ';'
                        | 'return' <Normal Stm>
+                       
+<Body Procedure>  ::=  <Body Procedure><Body Item Procedure> 
+                 |  
+              
+<Body Item Procedure>  ::=  <Var Decl>
+                 | <While Procedure>
+                 | <If Procedure>
+                 | <Read>
+                 | <Print>
+                 | <Normal Stm>
+                 | <Function Call>
                  
 ! ===================================================================
 ! Logical Expressions 
@@ -208,6 +241,7 @@ Comment Line  = '//'
                     | <Relational Expression> <Conditional Operator> <Logical Expression>
                     | '!' <Logical Expression>
                     | '!' <Relational Expression>
+                    | '!' Identifier
                       
 ! ===================================================================
 ! Arithmetic Expressions 
@@ -246,20 +280,3 @@ Comment Line  = '//'
                | Identifier '()'         
                |<Boolean Literal> 
                |StringLiteral
-               
-
-! ===================================================================
-! Matrix/Array Atribuition
-! ===================================================================
-
-<assignment_vector> ::= <assignment_vector_aux1> | <assignment_vector_aux2> 
-<assignment_vector_aux1> ::= '['<Index>']' '=' <Value>
-<assignment_vector_aux2> ::= '[' ']' '=' '{'<Value>'}'
-<value_assigned_vector> ::= <Value> ',' <value_assigned_vector> | <Value>
-
-<assignment_matrix> ::= <assignment_matrix_aux1> | <assignment_matrix_aux2>
-<assignment_matrix_aux1> ::= '['<Index>']' <assignment_vector_aux1>      
-<assignment_matrix_aux2> ::= '[' ']' '[' ']' '=' '{' '{' <value_assigned_matrix> '}' <dimensao_matrix2>
-<dimensao_matrix2> ::= ',' '{'<value_assigned_matrix> '}' '}'
-<value_assigned_matrix> ::= <Value> ',' <value_assigned_matrix> | <Value>
-
