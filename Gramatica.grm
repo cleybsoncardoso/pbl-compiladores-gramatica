@@ -138,7 +138,7 @@ Comment Line  = '//'
 <Aux> ::= '=' <Value> <Delimiter Var> | <Delimiter Var>|  <Vector><Assignment_vector><Delimiter Var>  | <Matrix><Assignment_matrix><Delimiter Var>                                                   
 <Delimiter Var> ::= ',' <Variable> |';'
                  
-<Index> ::= DecLiteral | Identifier    
+<Index> ::= DecLiteral|OctLiteral| Identifier    
 <Vector> ::= '['<Index>']'     
 <Matrix> ::= '['<Index>']' <Vector>  
           
