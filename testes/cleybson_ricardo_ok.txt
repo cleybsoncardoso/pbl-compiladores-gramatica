@@ -1,0 +1,27 @@
+const {
+    int a = 2;
+    real b = 2, c = 3;
+}
+
+var {
+    int a = 2;
+}
+
+start () {
+    var {
+        int resultado;
+    }
+    fatorial(10);
+    print(resultado);
+}
+
+function int fatorial(int numero) {
+    var {
+        int acumulado = 1;
+    }
+    while(numero != 0) {
+        acumulado = acumulado * numero;
+        numero = numero - 1;
+    }
+    return acumulado;
+}
