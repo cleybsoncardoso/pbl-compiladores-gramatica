@@ -106,9 +106,10 @@ Comment Line  = '//'
 
 <Struct Decl>  ::= struct Identifier <Extends> '{' <Struct Def> '}'  
 
-<Struct Def>   ::= <VariablesList> 
-                 | <VariablesList> <Struct Decl>
-                 
+<Struct Def>   ::= <VariablesList> <Struct Def Aux>
+
+<Struct Def Aux> ::= <Struct Decl>
+                   |                   
 <Extends> ::= 'extends' Identifier |
 
 ! ===================================================================
