@@ -105,12 +105,15 @@ Comment Line  = '//'
 <Typedef Decl> ::= typedef <Base> Identifier ';'
 
 <Base> ::= <Type>
-        | struct '{' <Struct Def> '}'  
+        | struct <Extends> '{' <Struct Def> '}'
+        | <Struct Decl>  
 
-<Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  
+<Struct Decl>  ::= struct Identifier <Extends> '{' <Struct Def> '}'  
 
 <Struct Def>   ::= <VariablesList> 
                  | <VariablesList> <Struct Decl>
+                 
+<Extends> ::= 'extends' Identifier |
 
 ! ===================================================================
 ! Constant Declaration
