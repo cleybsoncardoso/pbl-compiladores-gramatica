@@ -100,7 +100,6 @@ Comment Line  = '//'
 <Typedef Decl> ::= typedef <Base> Identifier ';'
 
 <Base> ::= <Type>
-        | struct Identifier 
         | struct '{' <Struct Def> '}'  
 
 <Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  ';' 
@@ -122,6 +121,8 @@ Comment Line  = '//'
         | real 
         | boolean 
         | string
+        | struct Identifier 
+        | Identifier
         
 <Value> ::= <Number>
          | <Boolean Literal> 
@@ -268,14 +269,14 @@ Comment Line  = '//'
 ! Matrix/Array Atribuition
 ! ===================================================================
 
-<assignment_vector> ::= <assignment_vector_aux1> | <assignment_vector_aux2> 
-<assignment_vector_aux1> ::= '['<Index>']' '=' <Value>
-<assignment_vector_aux2> ::= '[' ']' '=' '{'<Value>'}'
-<value_assigned_vector> ::= <Value> ',' <value_assigned_vector> | <Value>
+<Assignment_vector> ::= <Assignment_vector_aux1> | <Assignment_vector_aux2> 
+<Assignment_vector_aux1> ::= '['<Index>']' '=' <Value>
+<Assignment_vector_aux2> ::= '[' ']' '=' '{'<Value>'}'
+<Value_assigned_vector> ::= <Value> ',' <Value_assigned_vector> | <Value>
 
-<assignment_matrix> ::= <assignment_matrix_aux1> | <assignment_matrix_aux2>
-<assignment_matrix_aux1> ::= '['<Index>']' <assignment_vector_aux1>      
-<assignment_matrix_aux2> ::= '[' ']' '[' ']' '=' '{' '{' <value_assigned_matrix> '}' <dimensao_matrix2>
-<dimensao_matrix2> ::= ',' '{'<value_assigned_matrix> '}' '}'
-<value_assigned_matrix> ::= <Value> ',' <value_assigned_matrix> | <Value>
+<Assignment_matrix> ::= <Assignment_matrix_aux1> | <Assignment_matrix_aux2>
+<Assignment_matrix_aux1> ::= '['<Index>']' <Assignment_vector_aux1>      
+<assignment_matrix_aux2> ::= '[' ']' '[' ']' '=' '{' '{' <Value_assigned_matrix> '}' <Dimensao_matrix2>
+<Dimensao_matrix2> ::= ',' '{'<Value_assigned_matrix> '}' '}'
+<Value_assigned_matrix> ::= <Value> ',' <Value_assigned_matrix> | <Value>
 
