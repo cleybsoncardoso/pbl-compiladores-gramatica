@@ -107,9 +107,10 @@ Comment Line  = '//'
 <Base> ::= <Type>
         | struct '{' <Struct Def> '}'  
 
-<Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  ';' 
+<Struct Decl>  ::= struct Identifier '{' <Struct Def> '}'  
 
-<Struct Def>   ::= 
+<Struct Def>   ::= <VariablesList> 
+                 | <VariablesList> <Struct Decl>
 
 ! ===================================================================
 ! Constant Declaration
@@ -128,7 +129,7 @@ Comment Line  = '//'
         | string
         | struct Identifier 
         | Identifier
-        
+
 <Value> ::= <Number>
          | <Boolean Literal> 
          | StringLiteral
