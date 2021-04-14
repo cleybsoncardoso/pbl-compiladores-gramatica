@@ -60,12 +60,8 @@ Comment Line  = '//'
 ! ===================================================================
 ! Paramters List
 ! ===================================================================
-<Formal Parameter List> ::= <Formal Parameter Item> 
-                         | <Formal Parameter Item> ',' <Formal Parameter List>
-                         
-<Formal Parameter Item> ::= Identifier 
-                         | StringLiteral 
-                         | <Number>
+<Formal Parameter List> ::= <Exp> 
+                         | <Exp> ',' <Formal Parameter List>
       
 
 <Formal Parameter List Read> ::=  Identifier 
@@ -257,7 +253,7 @@ Comment Line  = '//'
 <Normal Stm> ::= <PrefixGlobalLocal><Assign> | <Assign> 
 
 <Assign> ::= Identifier '=' <Exp> ';'
-            | <Exp> ';'
+           | Identifier <Vector><Assignment_vector> ';' | Identifier <Matrix><Assignment_matrix> ';' | <Exp> ';'
               
 <Exp> ::= <Term> <Add Exp>
                       
@@ -278,3 +274,5 @@ Comment Line  = '//'
                | <Boolean Literal> 
                | StringLiteral
                | <Function Call>
+               | Identifier<Vector>
+               | Identifier<Matrix>
