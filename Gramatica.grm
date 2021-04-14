@@ -238,8 +238,6 @@ Comment Line  = '//'
                     | <Logical Expression> <Conditional Operator> Identifier
                     | <Logical Expression> <Conditional Operator> <Boolean Literal>
                     | <Boolean Literal> <Conditional Operator> Identifier
-                    | <Relational Expression> <Conditional Operator> <Logical Expression>
-                    | '!' <Logical Expression>
                     | '!' <Relational Expression>
                     | '!' Identifier
                       
