@@ -60,12 +60,8 @@ Comment Line  = '//'
 ! ===================================================================
 ! Paramters List
 ! ===================================================================
-<Formal Parameter List> ::= <Formal Parameter Item> 
-                         | <Formal Parameter Item> ',' <Formal Parameter List>
-                         
-<Formal Parameter Item> ::= Identifier 
-                         | StringLiteral 
-                         | <Number>
+<Formal Parameter List> ::= <Exp> 
+                         | <Exp> ',' <Formal Parameter List>
       
 
 <Formal Parameter List Read> ::=  Identifier 
