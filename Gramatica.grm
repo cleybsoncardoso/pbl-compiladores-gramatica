@@ -255,11 +255,11 @@ Comment Line  = '//'
                |  '==' <Exp>    !Equal
                |  '!=' <Exp>    !Not equal
 
-<Normal Stm> ::= <AssignAux> ';'
+<Normal Stm> ::= <PrefixGlobalLocal><Assign> | <Assign> 
 
-<AssignAux>::= <PrefixGlobalLocal><Assign> | <Assign> 
-<Assign> ::= Identifier '=' <Exp>
-            | <Exp>
+<Assign> ::= Identifier '=' <Exp> ';'
+            | Identifier '=' <Function Call>
+            | <Exp> ';'
               
 <Exp> ::= <Term> <Add Exp>
                       
