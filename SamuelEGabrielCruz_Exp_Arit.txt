@@ -1,0 +1,64 @@
+﻿! Welcome to GOLD Parser Builder 5.2
+"Name"    = 'PBL Compiladores' 
+"Version" = '2021'
+"Author"  = 'Samuel Vitorio Lima, Gabriel Cruz' 
+"About"   = 'Expressão Aritmétrica'
+
+"Start Symbol"   = <Decls>
+                 
+int                 = {Digit}+          
+float               = {Digit}*'.'{Digit}+
+{Id Head}           = {Letter} + [_]
+{Id Tail}           = {Id Head} + {Digit}     
+Identifier          = {Id Head}{Id Tail}*        
+
+
+<Decls> ::= 'start'
+            | <Normal Stm>
+
+<Normal Stm> ::= <Assign> ';'               
+               | return <Logical Expression> ';'
+               | ';'              !Null statement
+
+<Assign>  ::=    Identifier  '='  <Logical Expression>
+               | Identifier '+='  <Add Exp>
+               | Identifier '-='  <Add Exp>
+               | Identifier '*='  <Add Exp>
+               | Identifier '/='  <Add Exp>
+
+<Logical Expression> ::= <Relational Expression> '&&' <Logical Expression>
+                      | <Relational Expression> '||' <Logical Expression>
+                      | <Relational Expression>
+                      
+<Relational Expression>  ::= <Add Exp> '>'  <Add Exp> 
+               |  <Add Exp> '<'  <Add Exp> 
+               |  <Add Exp> '<=' <Add Exp> 
+               |  <Add Exp> '>=' <Add Exp>
+               |  <Add Exp> '==' <Add Exp>    !Equal
+               |  <Add Exp> '!=' <Add Exp>    !Not equal
+               |  <Add Exp>
+                 
+
+<Add Exp>     ::=  <Mult Exp> '+'  <Add Exp>
+               |   <Mult Exp> '-'  <Add Exp>
+               |   <Mult Exp> 
+
+<Mult Exp>    ::= <Unary>  '*' <Mult Exp> 
+               |  <Unary> '/' <Mult Exp>  
+               |  <Unary>
+
+<Unary>       ::= '++'   <Unary>
+               | '--'   <Unary>
+               | <Negate Exp>               
+
+<Negate Exp>  ::= '-' <Value> 
+               |  <Value> 
+
+!Add more values to the rule below - as needed
+
+<Value>       ::= Identifier
+               | '(' <Logical Expression> ')'
+               | Identifier '(' <Logical Expression> ')'
+               | Identifier '(' ')'          
+               | float
+               | int

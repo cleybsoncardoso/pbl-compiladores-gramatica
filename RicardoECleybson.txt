@@ -28,4 +28,19 @@ Identifier    = {ID Head}{ID Tail}*
 <Formal Parameter List> ::= Identifier
                           | <Formal Parameter List> ',' Identifier
 
-<Function Body> ::=
+<Function Body> ::= <Function Call>
+
+<Function Call> ::= Identifier <Arguments>
+<Arguments> ::= '(' ')'
+              | '(' <Argument List> ')'
+
+<Argument List> ::= <Assignment Expression>
+                  | <Argument List> ',' <Assignment Expression>
+
+<Logical Or Expression> ::= <Logical> | <Expression>
+
+<Conditional Expression> ::= <Logical Or Expression>
+                           | <Logical> '?' <Assignment Expression> ':' <Assignment Expression>
+
+<Assignment Expression> ::= <Conditional Expression>
+                          | <Logical> | <Expression> | Identifier | Number | <String>

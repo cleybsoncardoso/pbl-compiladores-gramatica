@@ -1,0 +1,16 @@
+"Name"     = 'Pbl Compiladores'
+"Author"   = 'Crystal'
+"Version"  = '0.0.1'
+"About"    = 'Metodo print'
+
+<printed> ::= Identifier | StringChar
+<printed_aux> ::= ','<printed><printed_aux> | 
+<print> ::= print '(' <printed> <printed_aux>  ')'’;’
+
+<index> ::= int | Identifier
+
+<declaration> ::= Type Identifier <derived_matrix_vector> <declaration_aux>';' 
+<declaration_aux> ::=  
+<derived_matrix_vector> ::= <vector> | <matrix>
+<vector> ::= '['<index>']'     
+<matrix> ::= '['<index>']' <vector>  

@@ -1,0 +1,36 @@
+"Name"    = 'Variavel de uso' 
+"Author"  = 'Gustavo Alves e Hiago Rangel' 
+!-------------------------------------------------
+"Start Symbol" = UseVariable
+!--------------------------------------------------                
+!Terminal
+!-------------------------------------------------- 
+{String Char} = {Printable} - ["] 
+Number = {Digit}+('.'{Digit}+)?
+StringChar  = '"'{String Char}*'"'
+Identifier    = {Letter}({AlphaNumeric} | '_')*
+      
+<UseIdentifier> ::= Identifier
+                 |global'.'Identifier
+                 |local'.'Identifier            
+                 
+<UseVariable> ::= <VariablesList>     
+              
+<VariablesList> ::= <Variable> <VariablesList> | <Void>
+
+<Variable> ::= <UseIdentifier> <Relational> <Value> <Delimiter> |<UseIdentifier><Delimiter>
+<Relational> ::= '='                                                                     
+<Delimiter> ::= ';'
+                                                                                  
+<Type> ::= int 
+        | real 
+        | boolean 
+        | string
+<Value> ::= Number 
+         |true
+         |false
+         | StringChar
+         |<UseIdentifier>
+        
+<Void> ::= 
+                 
