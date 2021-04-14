@@ -1,0 +1,24 @@
+const {
+   string str = "hello world";
+   boolean bool = true;
+   int i = 2;
+   int j = 1;
+}
+
+var {
+   int a = 1;
+   real vetor[1];
+}
+
+function void ler (int a) {
+   read (a);
+}
+
+start() {
+   var {
+     int b = 3;
+   }
+ler(a);
+ler(b);
+ler(vetor);
+} 
