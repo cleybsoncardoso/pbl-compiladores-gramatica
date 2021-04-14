@@ -39,7 +39,12 @@ Comment Line  = '//'
 ! Start 
 ! ===================================================================
 
-<Program> ::= <Const Decl><Var Decl><Decls><Start> 
+<Program> ::= <Global Decl><Decls><Start> 
+<Global Decl> ::= <Const Decl> 
+                | <Var Decl> 
+                | <Const Decl><Var Decl>  
+                | <Var Decl><Const Decl>               
+                |
 
 <Start> ::= 'start' '()' '{' <Body Procedure> '}' <Decls> 
         
