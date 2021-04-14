@@ -201,7 +201,7 @@ Comment Line  = '//'
 ! ===================================================================
 ! Statements
 ! ===================================================================
-<Body>        ::=  <Body><Body Item> 
+<Body>        ::=  <Body Item><Body> 
                  |  
               
 <Body Item>  ::=  <Var Decl>
@@ -215,7 +215,7 @@ Comment Line  = '//'
 <Return Statement> ::= 'return' ';'
                        | 'return' <Normal Stm>
                        
-<Body Procedure>  ::=  <Body Procedure><Body Item Procedure> 
+<Body Procedure>  ::=  <Body Item Procedure><Body Procedure> 
                  |  
               
 <Body Item Procedure>  ::=  <Var Decl>
