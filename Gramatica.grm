@@ -190,13 +190,13 @@ Comment Line  = '//'
 ! ===================================================================
 ! read
 ! ===================================================================
-<Read>  ::= read'(' <Formal Parameter List Read> ');'
+<Read>  ::= read'(' <Formal Parameter List Read> ')' ';'
 
 ! ===================================================================
 ! print
 ! ===================================================================
 
-<Print> ::= print'(' <Formal Parameter List>  ');'
+<Print> ::= print'(' <Formal Parameter List>  ')' ';'
 
 ! ===================================================================
 ! Statements
@@ -236,6 +236,8 @@ Comment Line  = '//'
                     | <Logical Expression> <Conditional Operator> Identifier
                     | <Logical Expression> <Conditional Operator> <Boolean Literal>
                     | <Boolean Literal> <Conditional Operator> Identifier
+                    | <Relational Expression> <Conditional Operator> <Logical Expression>
+                    | '!' <Logical Expression>
                     | '!' <Relational Expression>
                     | '!' Identifier
                       
@@ -270,6 +272,7 @@ Comment Line  = '//'
 
 <Expression Value>  ::= '-' <Expression Value> 
                |  Identifier
+               | '(' <Exp> ')'
                | <Number>        
                | <Boolean Literal> 
                | StringLiteral
