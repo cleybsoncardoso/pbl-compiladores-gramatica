@@ -236,8 +236,9 @@ Comment Line  = '//'
 <Logical Denied> ::= '!' Identifier 
                   | '!' <Boolean Literal>
                   | '!' <Logical Expression>
+                  | '!' <Relational Expression>
                   
-<Logical> ::= <Conditional Operator> <Expression Value Logical> | <Conditional Operator> <Logical Denied> 
+<Logical> ::= <Conditional Operator> <Expression Value Logical> | <Conditional Operator> <Logical Denied>
            
 <Expression Value Logical>  ::= Identifier       
                       | <Boolean Literal> 
@@ -245,7 +246,7 @@ Comment Line  = '//'
                       | <Function Call>
                       | <Relational Expression>
 
-<Logical Expression> ::= <Expression Value Logical> <Logical>    
+<Logical Expression> ::= <Expression Value Logical> <Logical> | <Logical Denied>   
                       
 ! ===================================================================
 ! Arithmetic Expressions 
