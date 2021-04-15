@@ -46,7 +46,7 @@ Comment Line  = '//'
                 | <Var Decl><Const Decl>               
                 |
 
-<Start> ::= 'start' '()' '{' <Body Procedure> '}' <Decls> 
+<Start> ::= 'start' '(' ')' '{' <Body Procedure> '}' <Decls> 
         
 <Decls> ::= <Decl> <Decls> | 
           
@@ -62,6 +62,7 @@ Comment Line  = '//'
 ! ===================================================================
 <Formal Parameter List> ::= <Exp> 
                          | <Exp> ',' <Formal Parameter List>
+                         |
       
 
 <Formal Parameter List Read> ::=  Identifier 
