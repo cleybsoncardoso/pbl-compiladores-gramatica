@@ -275,5 +275,3 @@ Comment Line  = '//'
                | <Boolean Literal> 
                | StringLiteral
                | <Function Call>
-               | Identifier<Vector>
-               | Identifier<Matrix>
