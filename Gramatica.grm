@@ -232,12 +232,20 @@ Comment Line  = '//'
 
 <Conditional Operator>  ::= '&&'
                       | '||' 
-                                                          
-<Logical Expression> ::= Identifier <Conditional Operator> Identifier
-                    | <Logical Expression> <Conditional Operator> Identifier
-                    | <Logical Expression> <Conditional Operator> <Boolean Literal>
-                    | <Boolean Literal> <Conditional Operator> Identifier
-                    | '!' <Boolean Literal>
+
+<Logical Denied> ::= '!' Identifier 
+                  | '!' <Boolean Literal>
+                  | '!' <Logical Expression>
+                  
+<Logical> ::= <Conditional Operator> <Expression Value Logical> | <Conditional Operator> <Logical Denied> 
+           
+<Expression Value Logical>  ::= Identifier       
+                      | <Boolean Literal> 
+                      | StringLiteral
+                      | <Function Call>
+                      | <Relational Expression>
+
+<Logical Expression> ::= <Expression Value Logical> <Logical>    
                       
 ! ===================================================================
 ! Arithmetic Expressions 
