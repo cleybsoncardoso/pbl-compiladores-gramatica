@@ -209,11 +209,11 @@ Comment Line  = '//'
                  | <If>
                  | <Read>
                  | <Print>
-                 | <Normal Stm>
+                 | <Assign>
                  | <Return Statement>
 
 <Return Statement> ::= 'return' ';'
-                       | 'return' <Normal Stm>
+                       | 'return' <Assign>
                        
 <Body Procedure>  ::=  <Body Item Procedure><Body Procedure> 
                  |  
@@ -223,7 +223,7 @@ Comment Line  = '//'
                  | <If Procedure>
                  | <Read>
                  | <Print>
-                 | <Normal Stm>
+                 | <Assign>
                  
 ! ===================================================================
 ! Logical Expressions 
@@ -250,12 +250,12 @@ Comment Line  = '//'
                |  '==' <Exp>    !Equal
                |  '!=' <Exp>    !Not equal
 
-<Normal Stm> ::= <PrefixGlobalLocal><Assign> | <Assign> 
 
-<Assign> ::= Identifier '=' <Exp> ';'
-           | Identifier <Vector><Assignment_vector> ';' | Identifier <Matrix><Assignment_matrix> ';' | <Exp> ';'
+<Assign> ::= <PrefixGlobalLocal> Identifier '=' <Exp> ';' 
+           | Identifier '=' <Exp> ';'
+           | Identifier <Vector><Assignment_vector> ';' | Identifier <Matrix><Assignment_matrix> ';' | <Exp> ';' 
               
-<Exp> ::= <Term> <Add Exp>
+<Exp> ::= <PrefixGlobalLocal> <Term> <Add Exp> | <Term> <Add Exp>
                       
 <Add Exp>     ::=  '+'  <Exp>
                |   '-'  <Exp> 
